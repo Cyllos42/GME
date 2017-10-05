@@ -15,7 +15,7 @@
   function() {
     console.log("GME: Starting Grepolis Map Enhancer");
     setCSS();
-    // createAwesomeNotification("", "Loaded Grepolis Map Enhancer");
+    createAwesomeNotification("", "You are using BETA Grepolis Map Enhancer!");
     initMapTownFeature();
     console.log("GME: Succesfully loaded Grepolis Map Enhancer! Player ID: " + Game.player_id);
   })();
