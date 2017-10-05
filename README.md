@@ -1,5 +1,6 @@
-# GME
-## Grepolis Map Enhancer
+# Grepolis Map Enhancer
+
+#### Created by Cyllos
 
 ### Changelog
 
