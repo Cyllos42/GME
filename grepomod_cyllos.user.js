@@ -120,7 +120,7 @@ function town_map_info(var1, var3) {
         // $(var1[var2])['append']('<div class="town_name">' + var3['name'] + '</div>');
         // playerColor = require("helpers/default_colors").getDefaultColorForPlayer(var3['player_id']);
         // console.log('GME: Player id: ' + var3['player_id'] + ' has color ' + playerColor);
-        $(var1[var2])['append']('<div class="alliance_name" style="background-color: inherit; opacity: 0.4;">' + (var3['alliance_name'] || '') + '</div>');
+        $(var1[var2])['append']('<div class="alliance_name" style="background-color: inherit;">' + (var3['alliance_name'] || '') + '</div>');
         break
       }
     }
