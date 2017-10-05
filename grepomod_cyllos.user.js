@@ -1,21 +1,22 @@
 // ==UserScript==
-// @name         Grepolis Map Enhancer BETA
+// @name         Grepolis Map Enhancer
 // @author       Cyllos
-// @description  Grepolis Map Enhancer by Cyllos BETA VERSION
+// @description  Grepolis Map Enhancer by Cyllos
 // @include      http://*.grepolis.com/game/*
 // @include      https://*.grepolis.com/game/*
 // @exclude      view-source://*
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://cyllos.keybase.pub/grepomod_cyllos.user.js
 // @downloadURL https://cyllos.keybase.pub/grepomod_cyllos.user.js
-// @version      1.2-BETA
+// @version      1.3
 // @grant        none
 // ==/UserScript==
+var playerColor;
 (
   function() {
     console.log("GME: Starting Grepolis Map Enhancer");
     setCSS();
-    createAwesomeNotification("", "You are using BETA Grepolis Map Enhancer!");
+    // createAwesomeNotification("", "You are using BETA Grepolis Map Enhancer!");
     initMapTownFeature();
     console.log("GME: Succesfully loaded Grepolis Map Enhancer! Player ID: " + Game.player_id);
   })();
@@ -100,14 +101,14 @@ function createAwesomeNotification(var1, var2) {
 }
 
 function town_map_info(var1, var3) {
-  if (var1 != undefined && var1['length'] > 0 && var3['player_name']) {
+  if (var1 != undefined && var1['length'] > 0 && var3['player_id']) {
     for (var var2 = 0; var2 < var1['length']; var2++) {
       if (var1[var2]['className'] == 'flag town') {
         if (typeof Assistant !== 'undefined') {
           if (Assistant['settings']['town_names']) {
             $(var1[var2])['addClass']('active_town')
           };
-          if (Assistant['settings']['player_name']) {
+          if (Assistant['settings']['player_id']) {
             $(var1[var2])['addClass']('active_player')
           };
           if (Assistant['settings']['alliance_name']) {
@@ -116,10 +117,9 @@ function town_map_info(var1, var3) {
         };
         // $(var1[var2])['append']('<div class="player_name">' + (var3['player_name'] || '') + '</div>');
         // $(var1[var2])['append']('<div class="town_name">' + var3['name'] + '</div>');
-        exec(function() {
-          alert(require("helpers/default_colors").getDefaultColorForPlayer(Game.player_id));
-        });
-        $(var1[var2])['append']('<div class="alliance_name">' + (var3['alliance_name'] || '') + '</div>');
+        playerColor = require("helpers/default_colors").getDefaultColorForPlayer(var3['player_id']);
+        console.log('GME: Player id: ' + var3['player_id'] + ' has color ' + playerColor);
+        $(var1[var2])['append']('<div class="alliance_name" style="background-color: inherit;">' + (var3['alliance_name'] || '') + '</div>');
         break
       }
     }
