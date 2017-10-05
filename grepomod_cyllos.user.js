@@ -139,6 +139,7 @@ function initMapTownFeature() {
   MapTiles['createTownDiv'] = var1(MapTiles['createTownDiv'])
 }
 
+
 function exec(fn) {
   var script = document.createElement('script');
   script.setAttribute("type", "application/javascript");
