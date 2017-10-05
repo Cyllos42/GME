@@ -1,21 +1,21 @@
 // ==UserScript==
-// @name         Grepolis Map Enhancer
+// @name         Grepolis Map Enhancer BETA
 // @author       Cyllos
-// @description  Grepolis Map Enhancer by Cyllos
+// @description  Grepolis Map Enhancer by Cyllos BETA VERSION
 // @include      http://*.grepolis.com/game/*
 // @include      https://*.grepolis.com/game/*
 // @exclude      view-source://*
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://cyllos.keybase.pub/grepomod_cyllos.user.js
 // @downloadURL https://cyllos.keybase.pub/grepomod_cyllos.user.js
-// @version      1.2
+// @version      1.2-BETA
 // @grant        none
 // ==/UserScript==
 (
   function() {
     console.log("GME: Starting Grepolis Map Enhancer");
     setCSS();
-    // createAwesomeNotification("", "Loaded Grepolis Map Enhancer");
+    createAwesomeNotification("", "You are using BETA Grepolis Map Enhancer!");
     initMapTownFeature();
     console.log("GME: Succesfully loaded Grepolis Map Enhancer! Player ID: " + Game.player_id);
   })();
@@ -116,6 +116,9 @@ function town_map_info(var1, var3) {
         };
         // $(var1[var2])['append']('<div class="player_name">' + (var3['player_name'] || '') + '</div>');
         // $(var1[var2])['append']('<div class="town_name">' + var3['name'] + '</div>');
+        exec(function() {
+          alert(require("helpers/default_colors").getDefaultColorForPlayer(Game.player_id));
+        });
         $(var1[var2])['append']('<div class="alliance_name">' + (var3['alliance_name'] || '') + '</div>');
         break
       }
@@ -133,4 +136,12 @@ function initMapTownFeature() {
     }
   };
   MapTiles['createTownDiv'] = var1(MapTiles['createTownDiv'])
+}
+
+function exec(fn) {
+  var script = document.createElement('script');
+  script.setAttribute("type", "application/javascript");
+  script.textContent = '(' + fn + ')();';
+  document.body.appendChild(script); // run the script
+  document.body.removeChild(script); // clean up
 }
