@@ -5,6 +5,7 @@
 ### Installatie
 
 Het script is gemakkelijk geinstalleerd: je hebt enkel Greasemonkey of Tampermonkey nodig!
+
 [Daarna klik je hier om het script te installeren.](https://github.com/Cyllos42/GME/raw/master/grepomod_cyllos.user.js)
 
 ### Changelog
