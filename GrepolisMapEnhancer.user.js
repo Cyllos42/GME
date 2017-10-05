@@ -6,8 +6,8 @@
 // @include      https://*.grepolis.com/game/*
 // @exclude      view-source://*
 // @exclude      https://classic.grepolis.com/game/*
-// @updateURL    https://cyllos.keybase.pub/grepomod_cyllos.user.js
-// @downloadURL https://cyllos.keybase.pub/grepomod_cyllos.user.js
+// @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
+// @downloadURL  https://github.com/Cyllos42/GME
 // @version      1.3
 // @grant        none
 // ==/UserScript==
