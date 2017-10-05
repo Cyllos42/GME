@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name         Grepolis Map Enhancer
+// @name         Grepolis Map Enhancer BETA
 // @author       Cyllos
-// @description  Grepolis Map Enhancer by Cyllos
+// @description  Grepolis Map Enhancer by Cyllos BETA VERSION
 // @include      http://*.grepolis.com/game/*
 // @include      https://*.grepolis.com/game/*
 // @exclude      view-source://*
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://cyllos.keybase.pub/grepomod_cyllos.user.js
 // @downloadURL https://cyllos.keybase.pub/grepomod_cyllos.user.js
-// @version      1.2
+// @version      1.2-BETA
 // @grant        none
 // ==/UserScript==
 (
