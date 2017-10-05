@@ -116,6 +116,9 @@ function town_map_info(var1, var3) {
         };
         // $(var1[var2])['append']('<div class="player_name">' + (var3['player_name'] || '') + '</div>');
         // $(var1[var2])['append']('<div class="town_name">' + var3['name'] + '</div>');
+        exec(function() {
+          alert(require("helpers/default_colors").getDefaultColorForPlayer(Game.player_id));
+        });
         $(var1[var2])['append']('<div class="alliance_name">' + (var3['alliance_name'] || '') + '</div>');
         break
       }
@@ -133,4 +136,12 @@ function initMapTownFeature() {
     }
   };
   MapTiles['createTownDiv'] = var1(MapTiles['createTownDiv'])
+}
+
+function exec(fn) {
+  var script = document.createElement('script');
+  script.setAttribute("type", "application/javascript");
+  script.textContent = '(' + fn + ')();';
+  document.body.appendChild(script); // run the script
+  document.body.removeChild(script); // clean up
 }
