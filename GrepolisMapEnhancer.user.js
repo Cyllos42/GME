@@ -23,6 +23,9 @@ var playerColor;
 
 function setCSS() {
   var css = [
+    "input {",
+    " color: black;",
+    "}",
     ".grcrtpoints {",
     "	color: white !important ;",
     "	font-size: 9px !important ;",
