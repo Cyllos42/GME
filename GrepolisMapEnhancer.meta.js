@@ -10,6 +10,6 @@
 https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  
 https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
-// @version      1.3.1
+// @version      1.3.2
 // @grant        none
 // ==/UserScript==
