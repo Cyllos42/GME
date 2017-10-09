@@ -66,7 +66,7 @@ function setCSS() {
     "",
     "#questlog .questlog_icon {",
     " background-color: rgba(0, 0, 0, 0);",
-    " background-image: url('https://cyllos.keybase.pub/questionlog.png');",
+    " background-image: url('https://github.com/Cyllos42/GME/raw/master/sources/questionlog.png');",
     "}",
     "",
     ".tile.farm_town {",
