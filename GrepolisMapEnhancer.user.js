@@ -8,7 +8,7 @@
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @downloadURL  https://github.com/Cyllos42/GME
-// @version      1.3
+// @version      1.3.1
 // @grant        none
 // ==/UserScript==
 var playerColor;
