@@ -21,7 +21,8 @@ v1.1:
 - kleur van opdrachten gewijzigd cuz why not
 
 v1.2:
-- alliantienamen op kaart toegevoegd 
+- alliantienamen op kaart toegevoegd
 
 v1.3:
 - alliantienamen op kaart kleuren
+- alliantietags doorzichtiger maken

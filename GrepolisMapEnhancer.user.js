@@ -8,7 +8,7 @@
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
-// @version      1.3.2
+// @version      1.3.2.1
 // @grant        none
 // ==/UserScript==
 var playerColor;
@@ -73,7 +73,7 @@ function setCSS() {
     "	border: none;",
     "}",
     "#map_towns .flag .alliance_name {",
-    "opacity: 0.8;",
+    "opacity: 0.5;",
     "position: absolute;",
     "top: -17px;",
     "left: -63px;",
