@@ -31,9 +31,11 @@ v1.3:
 ### Updates
 
 Indien automatische updates zijn ingeschakeld updatet het script zichzelf.
-Kan je niet wachten op nieuwe functies? Volg dan de insallatielink opnieuw.
+
+Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
 
 ### Feedback
 
 Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
-Je kan hier altijd een issue openen! 
+
+Je kan hier altijd een issue openen!
