@@ -27,3 +27,13 @@ v1.3:
 - alliantienamen op kaart kleuren
 - alliantietags doorzichtiger maken
 - goud offerings icoon verwijderd
+
+### Updates
+
+Indien automatische updates zijn ingeschakeld updatet het script zichzelf.
+Kan je niet wachten op nieuwe functies? Volg dan de insallatielink opnieuw.
+
+### Feedback
+
+Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
+Je kan hier altijd een issue openen! 
