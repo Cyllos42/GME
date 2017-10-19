@@ -8,7 +8,7 @@
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
-// @version      1.3.2.2
+// @version      1.3.2.3
 // @grant        none
 // ==/UserScript==
 var playerColor;
@@ -75,11 +75,12 @@ function setCSS() {
     "opacity: 0.5;",
     "position: absolute;",
     "top: -17px;",
-    "left: -63px;",
-    "width: 130px;",
+    "left: -58px;",
+    "width: 110px;",
     "color: white;",
     "text-align: center;",
     "display: block;",
+    "font-size: x-small;",
     "text-shadow: 1px 1px rgba(0,0,0,0.7);",
     "}",
     "",
