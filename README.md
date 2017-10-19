@@ -26,3 +26,4 @@ v1.2:
 v1.3:
 - alliantienamen op kaart kleuren
 - alliantietags doorzichtiger maken
+- goud offerings icoon verwijderd
