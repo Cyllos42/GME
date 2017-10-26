@@ -38,4 +38,4 @@ Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
 
 Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
 
-Je kan hier altijd een issue openen!
+Je kan hier altijd een issue openen, of me bereiken op [contact@cyllos.me](mailto:info@cyllos.me).
