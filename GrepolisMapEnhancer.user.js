@@ -8,7 +8,7 @@
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
-// @version      1.3.2.3
+// @version      1.3.3
 // @grant        none
 // ==/UserScript==
 var playerColor;
@@ -51,18 +51,6 @@ function setCSS() {
     "	opacity: 0.7;",
     "}",
     "",
-    ".tile.lvl3 {",
-    "	border: 3px rgba(255,255,255,0.2) solid;",
-    "}",
-    "",
-    ".tile.lvl4 {",
-    "	border: 3px rgba(255,255,255,0.2) solid;",
-    "}",
-    "",
-    ".tile.lvl5 {",
-    "	border: 3px rgba(255,255,255,0.7) solid;",
-    "}",
-    "",
     "#questlog .questlog_icon {",
     " background-color: rgba(0, 0, 0, 0);",
     " background-image: url('https://github.com/Cyllos42/GME/raw/master/sources/questionlog.png');",
@@ -70,6 +58,9 @@ function setCSS() {
     "",
     ".tile.farm_town {",
     "	border: none;",
+    "}",
+    ".attack_planner li.selected {",
+    "background: sandybrown;",
     "}",
     "#map_towns .flag .alliance_name {",
     "opacity: 0.8;",

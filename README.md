@@ -28,6 +28,10 @@ v1.3:
 - alliantietags doorzichtiger maken
 - goud offerings icoon verwijderd
 
+v1.3.3:
+- randjes rond grote steden verwijderd
+- gevraagde stad in aanvalsplanner duidelijker gemaakt
+
 ### Updates
 
 Indien automatische updates zijn ingeschakeld updatet het script zichzelf.
