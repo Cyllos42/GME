@@ -32,6 +32,9 @@ v1.3.3:
 - randjes rond grote steden verwijderd
 - gevraagde stad in aanvalsplanner duidelijker gemaakt
 
+v1.4
+- inactieve spelers op de kaart aangeduid
+
 ### Updates
 
 Indien automatische updates zijn ingeschakeld updatet het script zichzelf.

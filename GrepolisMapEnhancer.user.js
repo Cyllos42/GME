@@ -8,17 +8,16 @@
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
-// @version      1.3.3
+// @version      1.4
 // @grant        none
 // ==/UserScript==
-var playerColor;
+var idleList = {};
 (
   function() {
     console.log("GME: Starting Grepolis Map Enhancer");
     setCSS();
-    // createAwesomeNotification("", "You are using BETA Grepolis Map Enhancer!");
     initMapTownFeature();
-    console.log("GME: Succesfully loaded Grepolis Map Enhancer! Player ID: " + Game.player_id);
+    console.log("GME: Succesfully loaded Grepolis Map Enhancer!");
   })();
 
 function setCSS() {
@@ -99,7 +98,20 @@ function createAwesomeNotification(var1, var2) {
   var3['notify']($('#notification_area>.notification')['length'] + 1, var1, '<span><b>' + 'Grepolis Map Enhancer' + '</b></span>' + var2 + '<span class=\'small notification_date\'>' + ' </span>')
 }
 
-function town_map_info(var1, var3) {
+function getidleList() {
+  return $.ajax({
+    url: "https://www.grcrt.net/json.php",
+    method: "get",
+    data: {
+      method: "getIdleJSON",
+      world: Game.world_id
+    },
+    cache: !0
+  });
+}
+
+function town_map_info(var1, var3, data) {
+
   if (var1 != undefined && var1['length'] > 0 && var3['player_id']) {
     for (var var2 = 0; var2 < var1['length']; var2++) {
       if (var1[var2]['className'] == 'flag town') {
@@ -114,11 +126,21 @@ function town_map_info(var1, var3) {
             $(var1[var2])['addClass']('active_alliance')
           }
         };
-        // $(var1[var2])['append']('<div class="player_name">' + (var3['player_name'] || '') + '</div>');
-        // $(var1[var2])['append']('<div class="town_name">' + var3['name'] + '</div>');
-        // playerColor = require("helpers/default_colors").getDefaultColorForPlayer(var3['player_id']);
-        // console.log('GME: Player id: ' + var3['player_id'] + ' has color ' + playerColor);
-        $(var1[var2])['append']('<div class="alliance_name" style="background-color: inherit;">' + (var3['alliance_name'] || '') + '</div>');
+        var border = "";
+        var inactive = "";
+        var inactivecss = "";
+
+        if (data.JSON[var3['player_id']] > 1) {
+          inactive = "(" + parseInt(data.JSON[var3['player_id']]) + "d)";
+          inactivecss = "min-height: 11px;";
+          border = "border: rgba(255, 0, 0, 1) solid 2px;";
+        } else {
+          border = " ";
+          inactive = " "
+          inactivecss = " ";
+        }
+        $(var1[var2])['append']('<div class="alliance_name" style="background-color: inherit;' + border + '">' + (var3['alliance_name'] || '') + " " + inactive + '</div>');
+
         break
       }
     }
@@ -127,16 +149,18 @@ function town_map_info(var1, var3) {
 }
 
 function initMapTownFeature() {
-  console.log("GME: Adding town tags");
-  var var1 = function(var10) {
-    return function() {
-      var var1 = var10['apply'](this, arguments);
-      return town_map_info(var1, arguments[0]);
-    }
-  };
-  MapTiles['createTownDiv'] = var1(MapTiles['createTownDiv'])
+  idleList = getidleList();
+  idleList.success(function(data) {
+    console.log("GME: Adding town tags");
+    var var1 = function(var10) {
+      return function() {
+        var var1 = var10['apply'](this, arguments);
+        return town_map_info(var1, arguments[0], data);
+      }
+    };
+    MapTiles['createTownDiv'] = var1(MapTiles['createTownDiv'])
+  });
 }
-
 
 function exec(fn) {
   var script = document.createElement('script');
