@@ -8,7 +8,7 @@
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
-// @version      1.4
+// @version      1.4.a
 // @grant        none
 // ==/UserScript==
 var idleList = {};
@@ -128,16 +128,13 @@ function town_map_info(var1, var3, data) {
         };
         var border = "";
         var inactive = "";
-        var inactivecss = "";
 
-        if (data.JSON[var3['player_id']] > 1) {
+        if (data.JSON[var3['player_id']] > 0.5 && data.JSON[var3['player_id']] < 7) {
           inactive = "(" + parseInt(data.JSON[var3['player_id']]) + "d)";
-          inactivecss = "min-height: 11px;";
           border = "border: rgba(255, 0, 0, 1) solid 2px;";
         } else {
           border = " ";
           inactive = " "
-          inactivecss = " ";
         }
         $(var1[var2])['append']('<div class="alliance_name" style="background-color: inherit;' + border + '">' + (var3['alliance_name'] || '') + " " + inactive + '</div>');
 

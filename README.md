@@ -33,7 +33,7 @@ v1.3.3:
 - gevraagde stad in aanvalsplanner duidelijker gemaakt
 
 v1.4
-- inactieve spelers op de kaart aangeduid
+- inactieve spelers op de kaart aangeduid (een halve tot 7 dagen inactief)
 
 ### Updates
 
