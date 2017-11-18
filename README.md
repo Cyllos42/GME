@@ -1,4 +1,4 @@
-# Grepolis Map Enhancer
+# ![logo](https://github.com/Cyllos42/GME/raw/master/sources/logo.png)Grepolis Map Enhancer
 
 #### Created by Cyllos
 
