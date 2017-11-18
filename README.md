@@ -34,6 +34,8 @@ v1.3.3:
 
 v1.4
 - inactieve spelers op de kaart aangeduid (een halve tot 7 dagen inactief)
+- logo toegevoegd
+
 
 ### Updates
 
@@ -45,4 +47,4 @@ Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
 
 Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
 
-Je kan hier altijd een issue openen, of me bereiken op [contact@cyllos.me](mailto:info@cyllos.me).
+Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mailto:cyllos@cobrasec.org).
