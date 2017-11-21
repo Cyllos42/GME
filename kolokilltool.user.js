@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/kolokilltool.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/kolokilltool.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.5.b
+// @version      1.5.c
 // @grant        none
 // ==/UserScript==
 var idleList = {};
@@ -28,7 +28,7 @@ function observe(time) {
         } else {
             document.getElementsByClassName("title")[6].innerHTML = "Kolokiller plugin";
         }
-        document.getElementsByClassName('post')[0].innerHTML = '<iframe src="https://cyllos.me/GME/GME?action=portal&world_id=' + Game.world_id + '&alliance_id=' + Game.alliance_id + '&player_id=' + Game.player_id + '&player_name=' + Game.player_name + '" width="100%" height="100%"></iframe>';
+        document.getElementsByClassName('post')[0].innerHTML = '<iframe src="https://cyllos.me/GME/GME?action=portal&world_id=' + Game.world_id + '&alliance_id=' + Game.alliance_id + '&player_id=' + Game.player_id + '&player_name=' + Game.player_name + '" width="100%" height="500px"></iframe>';
         checkKolo(1000);
     }
     setTimeout(function() {

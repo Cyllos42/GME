@@ -9,6 +9,6 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/kolokilltool.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/kolokilltool.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.5.b
+// @version      1.5.c
 // @grant        none
 // ==/UserScript==
