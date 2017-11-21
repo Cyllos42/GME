@@ -36,6 +36,8 @@ v1.4
 - inactieve spelers op de kaart aangeduid (een halve tot 7 dagen inactief)
 - logo toegevoegd
 
+v1.5
+- kolokill tool toegevoegd. Maak een topic aan met de naam kolokiller om hiervan gebruik te maken.
 
 ### Updates
 
