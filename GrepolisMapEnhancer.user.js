@@ -23,9 +23,7 @@ var idleList = {};
     })();
 
 function observe(time) {
-    console.log('GME: Entering observe');
     if(document.getElementsByClassName("title")[0] != null && document.getElementsByClassName("title")[0].innerHTML == "Kolokiller" || document.getElementsByClassName("title")[6] != null && document.getElementsByClassName("title")[6].innerHTML == "Kolokiller"){
-        console.log('GME: Found kolo kill topic');
         if (document.getElementsByClassName("title")[0].innerHTML == "Kolokiller"){
             document.getElementsByClassName("title")[0].innerHTML = 'Kolokiller plugin';
         } else {
