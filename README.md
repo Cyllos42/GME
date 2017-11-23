@@ -39,6 +39,9 @@ v1.4
 v1.5
 - kolokill tool toegevoegd. Maak een topic aan met de naam kolokiller om hiervan gebruik te maken.
 
+v1.6
+- off tags toegevoegd! Zet op het einde van je topicnaam een D voor down, een O voor onderweg of een L voor ligt en kleur hem automatisch.
+
 ### Updates
 
 Indien automatische updates zijn ingeschakeld updatet het script zichzelf.
