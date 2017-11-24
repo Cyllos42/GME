@@ -9,17 +9,20 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.6.a
+// @version      1.7.a
 // @grant        none
 // ==/UserScript==
 var idleList = {};
+var koloSet = false;
+var startTime = 0;
+var totalTime = 0;
 (
     function() {
         console.log("GME: Starting Grepolis Map Enhancer");
         setCSS();
         stadsinfoStarter();
         console.log("GME: Succesfully loaded Grepolis Map Enhancer!");
-        observe(500); //Kolokill observer
+        observe(500); //observer
     })();
 
 function observe(time) {
@@ -27,7 +30,6 @@ function observe(time) {
         if (item.innerHTML == "Kolokiller") {
             item.innerHTML = "Kolokiller plugin";
             document.getElementsByClassName('post')[0].innerHTML = '<iframe src="https://cyllos.me/GME/GME?action=portal&world_id=' + Game.world_id + '&alliance_id=' + Game.alliance_id + '&player_id=' + Game.player_id + '&player_name=' + Game.player_name + '" width="100%" height="500px" frameborder="0"></iframe>';
-            checkKolo(1000);
         }
         if((/\ D$/).test(item.innerText)){
             if(!/down/.test(item.parentNode.parentNode.className)){
@@ -42,25 +44,80 @@ function observe(time) {
                 item.parentNode.parentNode.className += " ligt";
             }}
     }
+
+
+    koloAnimatie();
     setTimeout(function() {
         observe(time);
     }, time);
 }
 
 
-
-function checkKolo(time) {
-    for (var item of document.getElementsByClassName("title")) {
-        if (item.innerHTML == "Kolokiller plugin") {
-            setTimeout(function() {
-                return checkKolo(time);
-            }, time);
-        } else {
-            return false;
+function koloAnimatie(){
+    for(var item of document.getElementsByClassName("attack_takeover")){
+        if(koloSet == false){
+            startTime = item.parentNode.parentNode.dataset.starttime;
+            totalTime = item.parentNode.parentNode.dataset.timestamp;
+            for(var middle of document.getElementsByClassName('middle')){
+                if(middle.parentNode.className == 'nui_toolbar'){
+                    koloSet = true;
+                    for(var href of item.parentNode.childNodes){
+                        if(href.className == 'town_link'){
+                            link = href.childNodes[0].href;
+                        }
+                    }
+                    var vlag_r = '<a class="gp_town_link" href="'+ link + '"><img style="width: 15px;height: 18px; position: absolute; left: 33%; top: 10px;, z-index: 99;" src="https://github.com/Cyllos42/GME/raw/master/sources/flag_r.png"></a>';
+                    var vlag_y = '<img style="width: 15px;height: 18px; position: absolute; left: -15px; top: 10px;, z-index: 99;" src="https://github.com/Cyllos42/GME/raw/master/sources/flag_y.png">';
+                    var koloBoot = '<img id="koloboot" src="https://github.com/Cyllos42/GME/raw/master/sources/cs.png">';
+                    var koloLijn = '<div style="width: 33%; height: 5px; position: absolute; left: 0; top: 23px; z-index: 98;background: url(\'https://gpnl.innogamescdn.com/images/game/common/water_base.png\') repeat 0 0;}" id="kololijn"></div>';
+                    middle.innerHTML = middle.innerHTML + koloBoot + koloLijn + vlag_r + vlag_y;
+                }
+            }
         }
     }
+    if(startTime != 0){
+        var a = (Timestamp.server() - startTime)/(totalTime - startTime) * 33;
+        if(a*3 > 100) startTime = 0;
+        console.log("GME Tijd kolo %: " + a*3);
+        var css;
+        if(document.getElementById('kolocss') == null){
+            console.log('GME: Added kolo css.');
+            css = [
+                "#koloboot{",
+                "}"
+            ].join("\n");
 
+            var node = document.createElement("style");
+            node.type = "text/css";
+            node.id = 'kolocss';
+            node.appendChild(document.createTextNode(css));
+            var heads = document.getElementsByTagName("head");
+            if (heads.length > 0) {
+                heads[0].appendChild(node);
+            } else {
+                // no head yet, stick it whereever
+                document.documentElement.appendChild(node);
+                // }
+            }
+
+        } else {
+            console.log('GME: Updated kolo css.');
+            css = [
+                "#koloboot{",
+                "position: absolute;",
+                "left: " + a + "%;",
+                "top: 1px;",
+                "width: 25px;",
+                "height: 25px;",
+                "z-index: 100;",
+                "}"
+            ].join("\n");
+            document.getElementById('kolocss').innerHTML = css;
+        }
+    }
 }
+
+
 
 
 function setCSS() {
@@ -121,13 +178,13 @@ function setCSS() {
         "	display: none;",
         "}",
         ".ligt div{",
-        "background-color: #CCF29F",
+        "background-color: #CCF29F;",
         "}",
         ".omw div{",
-        "background-color: #CCD3D4",
+        "background-color: #CCD3D4;",
         "}",
         ".down div{",
-        "background-color: #FFBD9B",
+        "background-color: #FFBD9B;",
         "}"
     ].join("\n");
 
