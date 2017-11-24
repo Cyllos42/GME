@@ -2,6 +2,8 @@
 
 #### Created by Cyllos
 
+
+![afbeelding van GME](https://github.com/Cyllos42/GME/raw/master/sources/afbeelding.png)
 ### Installatie
 
 Het script is gemakkelijk geinstalleerd: je hebt enkel Greasemonkey of Tampermonkey nodig!
