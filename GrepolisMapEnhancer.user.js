@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.7.a
+// @version      1.7.b
 // @grant        none
 // ==/UserScript==
 var idleList = {};
@@ -76,9 +76,9 @@ function koloAnimatie(){
         }
     }
     if(startTime != 0){
-        var a = (Timestamp.server() - startTime)/(totalTime - startTime) * 33;
+        var a = (Timestamp.server() - startTime)/(totalTime - startTime) * 30;
         if(a*3 > 100) startTime = 0;
-        console.log("GME Tijd kolo %: " + a*3);
+        console.log("GME Tijd kolo %: " + a*3.333);
         var css;
         if(document.getElementById('kolocss') == null){
             console.log('GME: Added kolo css.');
