@@ -2,14 +2,17 @@
 
 #### Created by Cyllos
 
+
+![afbeelding van GME](https://github.com/Cyllos42/GME/raw/master/sources/afbeelding.png)
 ### Installatie
 
 Het script is gemakkelijk geinstalleerd: je hebt enkel Greasemonkey of Tampermonkey nodig!
 
 [Daarna klik je hier om het script te installeren.](https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js)
 
-### Changelog
 
+### Changelog
+```
 v1:
 - randjes rond grote steden
 - kleine steden minder zichtbaar
@@ -44,6 +47,7 @@ v1.6
 
 v1.7
 - kolo vaartijd gevisualiseerd en vijandige stad klikbaar gezet in rode vlag
+```
 ### Updates
 
 Indien automatische updates zijn ingeschakeld updatet het script zichzelf.
@@ -55,3 +59,11 @@ Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
 Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
 
 Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mailto:cyllos@cobrasec.org).
+
+### Doneer
+
+Mocht je mijn script handig vinden kan je altijd doneren :)
+
+BTC: `38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7`
+
+GRC: `SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b`
