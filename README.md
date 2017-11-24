@@ -10,8 +10,9 @@ Het script is gemakkelijk geinstalleerd: je hebt enkel Greasemonkey of Tampermon
 
 [Daarna klik je hier om het script te installeren.](https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js)
 
-### Changelog
 
+### Changelog
+```
 v1:
 - randjes rond grote steden
 - kleine steden minder zichtbaar
@@ -46,6 +47,7 @@ v1.6
 
 v1.7
 - kolo vaartijd gevisualiseerd en vijandige stad klikbaar gezet in rode vlag
+```
 ### Updates
 
 Indien automatische updates zijn ingeschakeld updatet het script zichzelf.
