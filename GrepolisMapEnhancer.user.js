@@ -66,10 +66,10 @@ function koloAnimatie(){
                             link = href.childNodes[0].href;
                         }
                     }
-                    var vlag_r = '<a class="gp_town_link" href="'+ link + '"><img style="width: 15px;height: 18px; position: absolute; left: 33%; top: 10px;, z-index: 99;" src="https://github.com/Cyllos42/GME/raw/master/sources/flag_r.png"></a>';
-                    var vlag_y = '<img style="width: 15px;height: 18px; position: absolute; left: -15px; top: 10px;, z-index: 99;" src="https://github.com/Cyllos42/GME/raw/master/sources/flag_y.png">';
-                    var koloBoot = '<img id="koloboot" src="https://github.com/Cyllos42/GME/raw/master/sources/cs.png">';
-                    var koloLijn = '<div style="width: 33%; height: 5px; position: absolute; left: 0; top: 23px; z-index: 98;background: url(\'https://gpnl.innogamescdn.com/images/game/common/water_base.png\') repeat 0 0;}" id="kololijn"></div>';
+                    var vlag_r = '<a class="gp_town_link koloAanduider" href="'+ link + '"><img style="width: 15px;height: 18px; position: absolute; left: 33%; top: 10px;, z-index: 99;" src="https://github.com/Cyllos42/GME/raw/master/sources/flag_r.png"></a>';
+                    var vlag_y = '<img class="koloAanduider" style="width: 15px;height: 18px; position: absolute; left: -15px; top: 10px;, z-index: 99;" src="https://github.com/Cyllos42/GME/raw/master/sources/flag_y.png">';
+                    var koloBoot = '<img class="koloAanduider" id="koloboot" src="https://github.com/Cyllos42/GME/raw/master/sources/cs.png">';
+                    var koloLijn = '<div class="koloAanduider" style="width: 33%; height: 5px; position: absolute; left: 0; top: 23px; z-index: 98;background: url(\'https://gpnl.innogamescdn.com/images/game/common/water_base.png\') repeat 0 0;}" id="kololijn"></div>';
                     middle.innerHTML = middle.innerHTML + koloBoot + koloLijn + vlag_r + vlag_y;
                 }
             }
@@ -77,7 +77,10 @@ function koloAnimatie(){
     }
     if(startTime != 0){
         var a = (Timestamp.server() - startTime)/(totalTime - startTime) * 30;
-        if(a*3 > 100) startTime = 0;
+        if(a*3.33 > 100) {
+          startTime = 0;
+          var koloAangekomen = true;
+        }
         console.log("GME Tijd kolo %: " + a*3.333);
         var css;
         if(document.getElementById('kolocss') == null){
@@ -115,6 +118,12 @@ function koloAnimatie(){
             document.getElementById('kolocss').innerHTML = css;
         }
     }
+    if(koloAangekomen){
+      for(var koloAanduider of document.getElementsByClassName('koloAanduider')){
+        koloAanduider.innerHTML = '';
+      }
+    }
+
 }
 
 
