@@ -65,4 +65,5 @@ Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mai
 Mocht je mijn script handig vinden kan je altijd doneren :)
 
 BTC: `38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7`
-GRC: `SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b'
+
+GRC: `SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b`
