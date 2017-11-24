@@ -42,6 +42,8 @@ v1.5
 v1.6
 - off tags toegevoegd! Zet op het einde van je topicnaam een D voor down, een O voor onderweg of een L voor ligt en kleur hem automatisch.
 
+v1.7
+- kolo vaartijd gevisualiseerd en vijandige stad klikbaar gezet in rode vlag
 ### Updates
 
 Indien automatische updates zijn ingeschakeld updatet het script zichzelf.
