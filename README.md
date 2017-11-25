@@ -14,14 +14,13 @@ Het script is gemakkelijk geinstalleerd: je hebt enkel Greasemonkey of Tampermon
 ### Changelog
 ```
 v1:
-- randjes rond grote steden
 - kleine steden minder zichtbaar
 - flikkerende opeisicoontjes
-- minder felle oceaancijfers
-- mooiere extra punten bij het bouwen
+- minder felle oceaancijfers van GRCRT
+- mooiere extra punten bij het bouwen van GRCRT
 
 v1.1:
-- kleur van opdrachten gewijzigd cuz why not
+- kleur van opdrachten gewijzigd
 
 v1.2:
 - alliantienamen op kaart toegevoegd
@@ -29,10 +28,8 @@ v1.2:
 v1.3:
 - alliantienamen op kaart kleuren
 - alliantietags doorzichtiger maken
-- goud offerings icoon verwijderd
 
 v1.3.3:
-- randjes rond grote steden verwijderd
 - gevraagde stad in aanvalsplanner duidelijker gemaakt
 
 v1.4
