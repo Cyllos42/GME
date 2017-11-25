@@ -6,10 +6,11 @@
 ![afbeelding van GME](https://github.com/Cyllos42/GME/raw/master/sources/afbeelding.png)
 ### Installatie
 
-Het script is gemakkelijk geinstalleerd: je hebt enkel Greasemonkey of Tampermonkey nodig!
+Het script is gemakkelijk geinstalleerd: je hebt enkel Tampermonkey nodig!
 
 [Daarna klik je hier om het script te installeren.](https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js)
 
+__Opgelet! Het script is nog niet goedgekeurd door Innogames. Daarom is het momenteel nog verboden om het te gebruiken.__
 
 ### Changelog
 ```
