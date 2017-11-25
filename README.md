@@ -2,8 +2,10 @@
 
 #### Created by Cyllos
 
-
+### Screenshots
 ![afbeelding van GME](https://github.com/Cyllos42/GME/raw/master/sources/afbeelding.png)
+![afbeelding van GME](https://cdn.discordapp.com/attachments/357957331113345026/383591149622788097/a9c5b55a-1e19-4bc4-a2a3-9a07f339369d.png)
+
 ### Installatie
 
 Het script is gemakkelijk geinstalleerd: je hebt enkel Tampermonkey nodig!
