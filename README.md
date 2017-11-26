@@ -2,67 +2,67 @@
 
 #### Created by Cyllos
 
-
+### Screenshots
 ![afbeelding van GME](https://github.com/Cyllos42/GME/raw/master/sources/afbeelding.png)
-### Installatie
+![afbeelding van GME](https://cdn.discordapp.com/attachments/357957331113345026/383591149622788097/a9c5b55a-1e19-4bc4-a2a3-9a07f339369d.png)
 
-Het script is gemakkelijk geinstalleerd: je hebt enkel Greasemonkey of Tampermonkey nodig!
+### Installation
 
-[Daarna klik je hier om het script te installeren.](https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js)
+Installing the script is easy: you only need Tampermonkey!
 
+[Then click here to install the script.](https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js)
+
+__Watch out! The script hasn't been approved by InnoGames. Therefore it is illegal to use it right now.__
 
 ### Changelog
 ```
 v1:
-- randjes rond grote steden
-- kleine steden minder zichtbaar
-- flikkerende opeisicoontjes
-- minder felle oceaancijfers
-- mooiere extra punten bij het bouwen
+- small cities less visible
+- flashing claim icons
+- GRCRT has less visible ocean numbers
+- GRCRT added points when building are cleaner
 
 v1.1:
-- kleur van opdrachten gewijzigd cuz why not
+- changed color of quests
 
 v1.2:
-- alliantienamen op kaart toegevoegd
+- added alliance tags to map
 
 v1.3:
-- alliantienamen op kaart kleuren
-- alliantietags doorzichtiger maken
-- goud offerings icoon verwijderd
+- colored alliance tags and made them more opaque
 
 v1.3.3:
-- randjes rond grote steden verwijderd
-- gevraagde stad in aanvalsplanner duidelijker gemaakt
+- added better color to needed city in the attack planner
 
 v1.4
-- inactieve spelers op de kaart aangeduid (een halve tot 7 dagen inactief)
-- logo toegevoegd
+- added inactive players to map (half to 7 days inactive)
+- added a simple logo
 
 v1.5
-- kolokill tool toegevoegd. Maak een topic aan met de naam kolokiller om hiervan gebruik te maken.
+- [BETA] added a tool to register colonisation ship kills. Make a topic on the forum named 'kolokiller'
 
 v1.6
-- off tags toegevoegd! Zet op het einde van je topicnaam een D voor down, een O voor onderweg of een L voor ligt en kleur hem automatisch.
+- added offense tags! At the end of your topic name on the forum add a L for a green color (cs lays), a D for a red color (cs down) or a O for a blue color (cs/plan on its way)
 
 v1.7
-- kolo vaartijd gevisualiseerd en vijandige stad klikbaar gezet in rode vlag
+- visualised colonisation ship movement. This only works if the page isn't reloaded after the colonisationship cannot be retreated any more. Press the red flag to select the enemies city
 ```
 ### Updates
 
-Indien automatische updates zijn ingeschakeld updatet het script zichzelf.
+The script updates itself automatically if you have enabled auto updates in Tampermonkey.
 
-Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
+Can't wait for a new funcion? Refollow installation instructions.
 
 ### Feedback
 
-Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
+Do you have a problem? Or would you love to see new functions?
 
-Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mailto:cyllos@cobrasec.org).
+Open an issue here, or reach me at [cyllos@cobrasec.org](mailto:cyllos@cobrasec.org).
+My public pgp key is available in this repo.
 
-### Doneer
+### Donate
 
-Mocht je mijn script handig vinden kan je altijd doneren :)
+I always appreciate a small donation :)
 
 BTC: `38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7`
 
