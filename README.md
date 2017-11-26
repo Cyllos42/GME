@@ -1,3 +1,70 @@
+#### Created by Cyllos
+ 
+### Screenshots
+![afbeelding van GME](https://github.com/Cyllos42/GME/raw/master/sources/afbeelding.png)
+![afbeelding van GME](https://cdn.discordapp.com/attachments/357957331113345026/383591149622788097/a9c5b55a-1e19-4bc4-a2a3-9a07f339369d.png)
+
+### Installatie
+#### Het script is goedgekeurd door InnoGames en mag dus gebruikt worden.
+
+Het script is gemakkelijk geinstalleerd: je hebt enkel Tampermonkey nodig!
+
+[Daarna klik je hier om het script te installeren.](https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js)
+
+ 
+### Changelog
+```
+v1:
+- kleine steden minder zichtbaar
+- flikkerende opeisicoontjes
+- minder felle oceaancijfers van GRCRT
+- mooiere extra punten bij het bouwen van GRCRT
+
+v1.1:
+- kleur van opdrachten gewijzigd
+
+v1.2:
+- alliantienamen op kaart toegevoegd
+
+v1.3:
+- alliantienamen op kaart kleuren
+- alliantietags doorzichtiger maken
+
+v1.3.3:
+- gevraagde stad in aanvalsplanner duidelijker gemaakt
+
+v1.4
+ inactieve spelers op de kaart aangeduid (een halve tot 7 dagen inactief)
+- logo toegevoegd
+ v1.5
+- kolokill tool toegevoegd. Maak een topic aan met de naam kolokiller om hiervan gebruik te maken.
+
+v1.6
+- off tags toegevoegd! Zet op het einde van je topicnaam een D voor down, een O voor onderweg of een L voor ligt en kleur hem automatisch.
+
+v1.7
+- kolo vaartijd gevisualiseerd en vijandige stad klikbaar gezet in rode vlag
+```
+### Updates
+
+Indien automatische updates zijn ingeschakeld updatet het script zichzelf.
+
+Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
+
+### Feedback
+
+Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
+
+Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mailto:cyllos@cobrasec.org).
+
+### Doneer
+
+Mocht je mijn script handig vinden kan je altijd doneren :)
+
+BTC: `38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7`
+ 
+GRC: `SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b`
+
 # ![logo](https://github.com/Cyllos42/GME/raw/master/sources/logo.png) Grepolis Map Enhancer
 
 #### Created by Cyllos
@@ -12,7 +79,6 @@ Installing the script is easy: you only need Tampermonkey!
 
 [Then click here to install the script.](https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js)
 
-__Watch out! The script hasn't been approved by InnoGames. Therefore it is illegal to use it right now.__
 
 ### Changelog
 ```
