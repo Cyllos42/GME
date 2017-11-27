@@ -11,6 +11,8 @@ Het script is gemakkelijk geinstalleerd: je hebt enkel Tampermonkey nodig!
 
 [Daarna klik je hier om het script te installeren.](https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js)
 
+###### [Indien je enkel de kolokill tool wilt kan je ook hier klikken.](https://github.com/Cyllos42/GME/raw/master/kolokilltool.user.js)
+
  
 ### Changelog
 ```
