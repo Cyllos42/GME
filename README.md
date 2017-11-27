@@ -1,5 +1,5 @@
 #### Created by Cyllos
- 
+
 ### Screenshots
 ![afbeelding van GME](https://github.com/Cyllos42/GME/raw/master/sources/afbeelding.png)
 ![afbeelding van GME](https://cdn.discordapp.com/attachments/357957331113345026/383591149622788097/a9c5b55a-1e19-4bc4-a2a3-9a07f339369d.png)
@@ -13,7 +13,7 @@ Het script is gemakkelijk geinstalleerd: je hebt enkel Tampermonkey nodig!
 
 ###### [Indien je enkel de kolokill tool wilt kan je ook hier klikken.](https://github.com/Cyllos42/GME/raw/master/kolokilltool.user.js)
 
- 
+
 ### Changelog
 ```
 v1:
@@ -42,7 +42,7 @@ v1.4
 - kolokill tool toegevoegd. Maak een topic aan met de naam kolokiller om hiervan gebruik te maken.
 
 v1.6
-- off tags toegevoegd! Zet op het einde van je topicnaam een D voor down, een O voor onderweg of een L voor ligt en kleur hem automatisch.
+- off tags toegevoegd! Zet op het einde van je topicnaam een kleur, zoals BLAUW, ROOD, GEEL, PAARS, ORANJE of GROEN.
 
 v1.7
 - kolo vaartijd gevisualiseerd en vijandige stad klikbaar gezet in rode vlag
@@ -64,7 +64,7 @@ Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mai
 Mocht je mijn script handig vinden kan je altijd doneren :)
 
 BTC: `38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7`
- 
+
 GRC: `SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b`
 
 # ![logo](https://github.com/Cyllos42/GME/raw/master/sources/logo.png) Grepolis Map Enhancer
