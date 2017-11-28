@@ -42,7 +42,7 @@ v1.4
 - kolokill tool toegevoegd. Maak een topic aan met de naam kolokiller om hiervan gebruik te maken.
 
 v1.6
-- off tags toegevoegd! Zet op het einde van je topicnaam een kleur, zoals BLAUW, ROOD, GEEL, PAARS, ORANJE of GROEN.
+- off tags toegevoegd! Zet op het einde van je topicnaam een kleur. Kleuren zijn BLAUW (of B), ROOD (of R), GEEL (of E), PAARS (of P), ORANJE (of O) of GROEN (of G)
 
 v1.7
 - kolo vaartijd gevisualiseerd en vijandige stad klikbaar gezet in rode vlag

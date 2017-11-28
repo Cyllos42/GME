@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.7.d
+// @version      1.7.e
 // @grant        none
 // ==/UserScript==
 var idleList = {};
@@ -31,32 +31,32 @@ function observe(time) {
       item.innerHTML = "Kolokiller plugin";
       document.getElementsByClassName('post')[0].innerHTML = '<iframe src="https://cyllos.me/GME/GME?action=portal&world_id=' + Game.world_id + '&alliance_id=' + Game.alliance_id + '&player_id=' + Game.player_id + '&player_name=' + Game.player_name + '" width="100%" height="500px" frameborder="0"></iframe>';
     }
-    if ((/\ ROOD$/).test(item.innerText)) {
+    if ((/\ ROOD$/).test(item.innerText) || (/\ R$/).test(item.innerText)) {
       if (!/rood/.test(item.parentNode.parentNode.className)) {
         item.parentNode.parentNode.className += " rood";
       }
     }
-    if ((/\ BLAUW$/).test(item.innerText)) {
+    if ((/\ BLAUW$/).test(item.innerText) || (/\ B$/).test(item.innerText)) {
       if (!/bauw/.test(item.parentNode.parentNode.className)) {
         item.parentNode.parentNode.className += " blauw";
       }
     }
-    if ((/\ GROEN$/).test(item.innerText)) {
+    if ((/\ GROEN$/).test(item.innerText) || (/\ G$/).test(item.innerText)) {
       if (!/groen/.test(item.parentNode.parentNode.className)) {
         item.parentNode.parentNode.className += " groen";
       }
     }
-    if ((/\ GEEL$/).test(item.innerText)) {
+    if ((/\ GEEL$/).test(item.innerText) || (/\ GE$/).test(item.innerText)) {
       if (!/geel/.test(item.parentNode.parentNode.className)) {
         item.parentNode.parentNode.className += " geel";
       }
     }
-    if ((/\ ORANJE$/).test(item.innerText)) {
+    if ((/\ ORANJE$/).test(item.innerText) || (/\ O$/).test(item.innerText)) {
       if (!/oranje/.test(item.parentNode.parentNode.className)) {
         item.parentNode.parentNode.className += " oranje";
       }
     }
-    if ((/\ PAARS$/).test(item.innerText)) {
+    if ((/\ PAARS$/).test(item.innerText) || (/\ P$/).test(item.innerText)) {
       if (!/paars/.test(item.parentNode.parentNode.className)) {
         item.parentNode.parentNode.className += " paars";
       }
