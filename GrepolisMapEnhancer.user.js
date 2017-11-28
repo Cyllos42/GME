@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.7.e
+// @version      1.7.f
 // @grant        none
 // ==/UserScript==
 var idleList = {};
@@ -46,7 +46,7 @@ function observe(time) {
         item.parentNode.parentNode.className += " groen";
       }
     }
-    if ((/\ GEEL$/).test(item.innerText) || (/\ GE$/).test(item.innerText)) {
+    if ((/\ GEEL$/).test(item.innerText) || (/\ E$/).test(item.innerText)) {
       if (!/geel/.test(item.parentNode.parentNode.className)) {
         item.parentNode.parentNode.className += " geel";
       }
