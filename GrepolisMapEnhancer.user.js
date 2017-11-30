@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.7.g
+// @version      1.8.a
 // @grant GM_setValue
 // @grant GM_getValue
 // ==/UserScript==
@@ -37,9 +37,46 @@ function observe(time) {
   }
 //  checkSettings();
   koloAnimatie();
+  checkTerugtrekTijd();
   setTimeout(function() {
     observe(time);
   }, time);
+}
+
+function checkTerugtrekTijd(){
+    var foundAttacks = false;
+    var elementList;
+    for(var itemlist of document.getElementsByClassName('js-dropdown-item-list')){
+        if(itemlist.childElementCount != 0 && /movement/.test(itemlist.children[0].id)){
+           foundAttacks = true;
+            elementList = itemlist;
+            break;
+           }
+    }
+    if(foundAttacks && elementList.children != null){
+        for(var child of elementList.children){
+            if(child.dataset.starttime != -1 && child.children[0].children[1].children[2] == null){
+                retreatTimestamp = parseInt(child.dataset.starttime) + 600;
+                serverTimestamp = Timestamp.server();
+                console.log('GME: Found retreat max: ' + Timestamp.toDate(retreatTimestamp));
+                if(retreatTimestamp > serverTimestamp){
+                    indicator = document.createElement('div');
+                    indicator.className = 'indicator';
+                    retreatTime = Timestamp.toDate(retreatTimestamp);
+                    indicator.innerHTML = retreatTime.getHours() + ':' + retreatTime.getMinutes() + ':' + retreatTime.getSeconds();
+                    child.children[0].children[1].appendChild(indicator);
+                }
+            }
+            if(child.dataset.starttime != -1 && child.children[0].children[1].children[2] != null){
+                retreatTimestamp = parseInt(child.dataset.starttime) + 600;
+                serverTimestamp = Timestamp.server();
+                if(retreatTimestamp < serverTimestamp){
+                    child.children[0].children[1].children[2].innerHTML = ' ';
+                }
+            }
+        }
+
+    }
 }
 
 function checkColors(item){
@@ -109,7 +146,9 @@ function checkSettings() {
 
 
 function koloAnimatie() {
+  var link = null;
   for (var item of document.getElementsByClassName("attack_takeover")) {
+    if(/support_filter/.test(item.className)) break;
     if (koloSet == false) {
       startTime = item.parentNode.parentNode.dataset.starttime;
       totalTime = item.parentNode.parentNode.dataset.timestamp;
@@ -193,6 +232,11 @@ function setCSS() {
     ".grcrtpoints {",
     "	color: white !important ;",
     "	font-size: 9px !important ;",
+    "}",
+    ".indicator {",
+    "	color: rgba(150, 0, 0, 0.5) ;",
+    "	font-size: xx-small ;",
+    "   position: fixed;",
     "}",
     "",
     "#map .badge.claim{",

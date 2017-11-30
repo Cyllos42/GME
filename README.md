@@ -46,6 +46,9 @@ v1.6
 
 v1.7
 - kolo vaartijd gevisualiseerd en vijandige stad klikbaar gezet in rode vlag
+
+v1.8
+- laatste terugtrek moment wordt nu weergegeven, fix dat kolo vaartijd werd getoond bij openen overzicht
 ```
 ### Updates
 
@@ -114,6 +117,9 @@ v1.6
 
 v1.7
 - visualised colonisation ship movement. This only works if the page isn't reloaded after the colonisationship cannot be retreated any more. Press the red flag to select the enemies city
+
+v1.8
+- last moment of retreak is shown, fix cs visualiser starting on opening overview
 ```
 ### Updates
 
