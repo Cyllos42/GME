@@ -9,8 +9,9 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.7.f
-// @grant        none
+// @version      1.7.g
+// @grant GM_setValue
+// @grant GM_getValue
 // ==/UserScript==
 var idleList = {};
 var koloSet = false;
@@ -22,7 +23,7 @@ var totalTime = 0;
     setCSS();
     stadsinfoStarter();
     console.log("GME: Succesfully loaded Grepolis Map Enhancer!");
-    observe(500); //observer
+    observe(300); //observer
   })();
 
 function observe(time) {
@@ -31,7 +32,18 @@ function observe(time) {
       item.innerHTML = "Kolokiller plugin";
       document.getElementsByClassName('post')[0].innerHTML = '<iframe src="https://cyllos.me/GME/GME?action=portal&world_id=' + Game.world_id + '&alliance_id=' + Game.alliance_id + '&player_id=' + Game.player_id + '&player_name=' + Game.player_name + '" width="100%" height="500px" frameborder="0"></iframe>';
     }
-    if ((/\ ROOD$/).test(item.innerText) || (/\ R$/).test(item.innerText)) {
+      checkColors(item);
+
+  }
+//  checkSettings();
+  koloAnimatie();
+  setTimeout(function() {
+    observe(time);
+  }, time);
+}
+
+function checkColors(item){
+        if ((/\ ROOD$/).test(item.innerText) || (/\ R$/).test(item.innerText)) {
       if (!/rood/.test(item.parentNode.parentNode.className)) {
         item.parentNode.parentNode.className += " rood";
       }
@@ -61,14 +73,38 @@ function observe(time) {
         item.parentNode.parentNode.className += " paars";
       }
     }
+}
 
-  }
+function doSettings() {
+    var windowExists = false;
+    var windowItem = null;
+    for(var item of document.getElementsByClassName('ui-dialog-title')){
+        if(item.innerHTML == "GME Settings"){
+            windowExists = true;
+            windowItem = item;
+        }
+    }
+    if(!windowExists) Layout.wnd.Create(20, "GME Settings");
+    while(windowItem == null && windowItem.innerHTML != "GME Settings"){
 
+    }
+        console.log('Open settings');
+        title = windowItem;
+        title.innerHTML = "Grepolis Map Enhancer Settings";
+        body = document.getElementById('gpwnd_1001');
+        body.innerHTML = null;
+        var html = '<h4>Settings</h4>';
+        body.innerHTML = html;
 
-  koloAnimatie();
-  setTimeout(function() {
-    observe(time);
-  }, time);
+}
+
+function checkSettings() {
+    if(document.getElementById('support') != null && document.getElementById('GMESetupLink') == null){
+        code = '<li class="with-icon"><img class="support-menu-item-icon" src="https://github.com/Cyllos42/GME/raw/master/sources/logo.png" style="width: 15px;"><a id="GMESetupLink" href="#">Grepolis Map Enhancer</a></li>';
+        document.getElementById('support').parentNode.parentNode.innerHTML = code + document.getElementById('support').parentNode.parentNode.innerHTML;
+        $("#GMESetupLink").click(doSettings);
+    }
+
 }
 
 
@@ -94,11 +130,12 @@ function koloAnimatie() {
       }
     }
   }
+    var koloAangekomen = false;
   if (startTime != 0) {
     var a = (Timestamp.server() - startTime) / (totalTime - startTime) * 30;
     if (a * 3.33 > 100) {
       startTime = 0;
-      var koloAangekomen = true;
+      koloAangekomen = true;
     }
     console.log("GME Tijd kolo %: " + a * 3.333);
     var css;
@@ -166,7 +203,13 @@ function setCSS() {
     "    opacity: 0.0;",
     "  }",
     "}",
-    "",
+    "@keyframes blink-animation2 {",
+    "90% {",
+    "    outline-style: solid;",
+      "  outline-color: limegreen;",
+      "   outline-offset: 0px;",
+    "  }",
+    "}",
     ".RepConvON {",
     "	opacity: 0.04 !important;",
     "}",
@@ -265,7 +308,7 @@ function stadsinfo(var1, var3, data) {
         var inactive = "";
         if (data.JSON[var3.player_id] > 0.5 && data.JSON[var3.player_id] < 7) {
           inactive = "(" + parseInt(data.JSON[var3.player_id]) + "d)";
-          border = "border: rgba(255, 0, 0, 1) solid 2px;";
+          border = "outline: groove red 2px;animation: blink-animation2 2s steps(1, start) infinite;";
         } else {
           border = " ";
           inactive = " ";

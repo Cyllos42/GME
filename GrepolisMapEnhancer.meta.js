@@ -9,6 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.7.f
-// @grant        none
+// @version      1.7.g
+// @grant GM_setValue
+// @grant GM_getValue
 // ==/UserScript==
