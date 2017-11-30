@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.8.a
+// @version      1.8.b
 // @grant GM_setValue
 // @grant GM_getValue
 // ==/UserScript==
@@ -146,7 +146,6 @@ function checkSettings() {
 
 
 function koloAnimatie() {
-  var link = null;
   for (var item of document.getElementsByClassName("attack_takeover")) {
     if(/support_filter/.test(item.className)) break;
     if (koloSet == false) {
