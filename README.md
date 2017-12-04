@@ -49,6 +49,7 @@ v1.7
 
 v1.8
 - laatste terugtrek moment wordt nu weergegeven, fix dat kolo vaartijd werd getoond bij openen overzicht
+- moment aankomst aanval wordt nu weergegeven
 ```
 ### Updates
 
@@ -120,6 +121,7 @@ v1.7
 
 v1.8
 - last moment of retreak is shown, fix cs visualiser starting on opening overview
+- attack time now added to attack list
 ```
 ### Updates
 
