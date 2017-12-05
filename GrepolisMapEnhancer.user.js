@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.9.a
+// @version      1.9.b
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant unsafeWindow
@@ -173,7 +173,7 @@ function doSettings() {
     title = windowItem;
     title.innerHTML = "Grepolis Map Enhancer Instellingen";
     frame = title.parentElement.parentElement.children[1].children[4];
-    frame.innerHTML = null;
+    frame.innerHTML = '';
     var html = document.createElement('html');
     var body = document.createElement('div');
     var head = document.createElement('head');
@@ -350,7 +350,7 @@ function doSettings() {
     body.appendChild(listitem);
 
     element = document.createElement('p');
-    element.innerHTML = 'Grepolis Map Enhancer v.' + GM.info.script.version;
+    element.innerHTML = 'Grepolis Map Enhancer v.' + GM_info.script.version;
     element.innerHTML += '<br>Copyright &copy; cyllos ' + Timestamp.toDate(Timestamp.server()).getFullYear();
     element.style.position = 'absolute';
     element.style.bottom = "0";
@@ -485,7 +485,7 @@ function setCSS() {
         "	font-size: xx-small ;",
         "   position: relative;",
         "   display: flex;",
-        "   margin-top: -10px;",
+        "   line-height: 0px;",
         "}",
         "",
         "#map .badge.claim{",
@@ -526,6 +526,7 @@ function setCSS() {
         "background: sandybrown;",
         "}",
         "#map_towns .flag .alliance_name {",
+        "pointer-events: none;",
         "opacity: 0.8;",
         "position: absolute;",
         "top: -17px;",
