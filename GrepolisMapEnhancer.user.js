@@ -9,10 +9,9 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.9.b
+// @version      1.9.c
 // @grant GM_setValue
 // @grant GM_getValue
-// @grant unsafeWindow
 // ==/UserScript==
 var idleList = {};
 var koloSet = false;
@@ -81,7 +80,11 @@ function checkTijden(){
                 //Zet tijd om
                 aankomstTime = Timestamp.toDate(child.dataset.timestamp);
                 //Creeer data
-                aankomstData = aankomstTime.getHours() + ':' + aankomstTime.getMinutes() + ':' + aankomstTime.getSeconds();
+                aankomstuur = aankomstTime.getHours(); if(aankomstTime.getHours() < 10) aankomstuur = "0" + aankomstTime.getHours();
+                aankomstmin = aankomstTime.getMinutes(); if(aankomstTime.getMinutes() < 10) aankomstmin = "0" + aankomstTime.getMinutes();
+                aankomstsec = aankomstTime.getSeconds(); if(aankomstTime.getSeconds() < 10) aankomstsec = "0" + aankomstTime.getSeconds();
+
+                aankomstData = aankomstuur + ':' + aankomstmin + ':' + aankomstsec;
                 //Voeg data toe aan HTML
                 indicatorText = document.createElement('p');
                 indicatorText.innerHTML = aankomstData;
@@ -102,7 +105,10 @@ function checkTijden(){
                         indicatorText = document.createElement('p');
                         indicatorText.className = 'indicatorTerugtrek';
                         retreatTime = Timestamp.toDate(retreatTimestamp);
-                        indicatorText.innerHTML = ' (' + retreatTime.getHours() + ':' + retreatTime.getMinutes() + ':' + retreatTime.getSeconds() + ')';
+                        retreatuur = retreatTime.getHours(); if(retreatTime.getHours() < 10) retreatuur = "0" + retreatTime.getHours();
+                        retreatmin = retreatTime.getMinutes(); if(retreatTime.getMinutes() < 10) retreatmin = "0" + retreatTime.getMinutes();
+                        retreatsec = retreatTime.getSeconds(); if(retreatTime.getSeconds() < 10) retreatsec = "0" + retreatTime.getSeconds();
+                        indicatorText.innerHTML = ' (' + retreatuur + ':' + retreatmin + ':' + retreatsec + ')';
                         child.children[0].children[1].children[2].appendChild(indicatorText);
                     }
                 }
@@ -399,11 +405,7 @@ function koloAnimatie() {
             for (var middle of document.getElementsByClassName('middle')) {
                 if (middle.parentNode.className == 'nui_toolbar') {
                     koloSet = true;
-                    for (var href of item.parentNode.childNodes) {
-                        if (href.className == 'town_link') {
-                            link = href.childNodes[0].href;
-                        }
-                    }
+                    link = item.parentElement.children[1].children[1].children[0].href;
                     var vlag_r = '<p class ="koloAanduider"><a class="gp_town_link" href="' + link + '"><img style="width: 15px;height: 18px; position: absolute; left: 33%; top: 10px;, z-index: 99;" src="https://github.com/Cyllos42/GME/raw/master/sources/flag_r.png"></a></p>';
                     var vlag_y = '<img class="koloAanduider" style="width: 15px;height: 18px; position: absolute; left: -15px; top: 10px;, z-index: 99;" src="https://github.com/Cyllos42/GME/raw/master/sources/flag_y.png">';
                     var koloBoot = '<img class="koloAanduider" id="koloboot" src="https://github.com/Cyllos42/GME/raw/master/sources/cs.png">';
