@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.9.c
+// @version      1.9.d
 // @grant GM_setValue
 // @grant GM_getValue
 // ==/UserScript==
@@ -32,7 +32,7 @@ var settings = {};
 
 
 function laadSettings(){
-
+    settings.oceaannummer = GM_getValue('setting_oceaannummer', true);
     settings.inactive = GM_getValue('setting_inactive', true);
     settings.inactiveMin = GM_getValue('setting_inactiveMin', 1);
     settings.inactiveMax = GM_getValue('setting_inactiveMax', 10);
@@ -204,6 +204,19 @@ function doSettings() {
     caption = document.createElement('div');
     caption.className = 'cbx_caption';
     listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.oceaannummer) state = "checked";
+    listitem.id = "setting_oceaannummer";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Minder felle oceaancijfers (GRCRT) op kaart";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
     state = "unchecked";if(settings.tags) state = "checked";
     listitem.id = "setting_tags";
     listitem.className = "gmesettings checkbox_new green " + state;
@@ -227,6 +240,7 @@ function doSettings() {
 
     listitem = document.createElement('p');
     listitem.innerHTML = "Minimum tot maximum dagen inactief";
+    listitem.style.lineHeight = '0';
     list.appendChild(listitem);
 
     listitem = document.createElement('div');
@@ -242,22 +256,6 @@ function doSettings() {
     listitem.style.width = '60px';
     listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="setting_inactiveMax" value="' + settings.inactiveMax + '" size="10" type="text"></div></div>';
     list.appendChild(listitem);
-
-    element = document.createElement('div');
-    element.className = "button_new";
-    element.id = 'setting_saveValues';
-    element.style.margin = "2px";
-    var childElement = document.createElement('div');
-    childElement.className = 'left';
-    element.appendChild(childElement);
-    childElement = document.createElement('div');
-    childElement.className = 'right';
-    element.appendChild(childElement);
-    childElement = document.createElement('div');
-    childElement.className = 'caption js-caption';
-    childElement.innerHTML = 'Opslaan<div class="effect js-effect"></div>';
-    element.appendChild(childElement);
-    list.appendChild(element);
 
     checkbox = document.createElement('div');
     checkbox.className = 'cbx_icon';
@@ -311,6 +309,19 @@ function doSettings() {
     listitem.appendChild(caption);
     list.appendChild(listitem.parentElement);
 
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.support) state = "checked";
+    listitem.id = "setting_support";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Steun zonder te doneren<p style=\"line-height: 0;font-size: 9px;\">(toont geen ads maar werkt niet met adblock aan)";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
     body.appendChild(list);
     element = document.createElement('div');
     element.className = "button_new";
@@ -324,7 +335,7 @@ function doSettings() {
     element.appendChild(childElement);
     childElement = document.createElement('div');
     childElement.className = 'caption js-caption';
-    childElement.innerHTML = 'Pagina herladen<div class="effect js-effect"></div>';
+    childElement.innerHTML = 'Opslaan en herladen<div class="effect js-effect"></div>';
     element.style.float = 'left';
     element.appendChild(childElement);
     body.appendChild(element);
@@ -339,22 +350,6 @@ function doSettings() {
     element.style.right = "0";
     body.appendChild(element);
 
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.support) state = "checked";
-    listitem.id = "setting_support";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Steun zonder te doneren<br><p style=\"font-size: 10px;\">(whitelist deze pagina op je adblock, maar ik toon geen ads)</p>";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    listitem.style.position = 'absolute';
-    listitem.style.bottom = "45px";
-    listitem.style.left = "0";
-    body.appendChild(listitem);
-
     element = document.createElement('p');
     element.innerHTML = 'Grepolis Map Enhancer v.' + GM_info.script.version;
     element.innerHTML += '<br>Copyright &copy; cyllos ' + Timestamp.toDate(Timestamp.server()).getFullYear();
@@ -367,8 +362,7 @@ function doSettings() {
     html.appendChild(body);
     frame.appendChild(html);
     $(".gmesettings").click(function(){toggleSetting(this);});
-    $("#setting_saveValues").click(function(){GM_setValue('setting_inactiveMin', $('#setting_inactiveMin').val()); GM_setValue('setting_inactiveMax', $('#setting_inactiveMax').val());});
-    $("#settings_reload").click(function(){window.location.reload(true); });
+    $("#settings_reload").click(function(){GM_setValue('setting_inactiveMin', $('#setting_inactiveMin').val()); GM_setValue('setting_inactiveMax', $('#setting_inactiveMax').val());window.location.reload(true); });
 }
 function toggleSetting(element) {
     $('#' + element.id).toggleClass("checked");
@@ -468,6 +462,9 @@ function koloAnimatie() {
 }
 
 function setCSS() {
+    if(settings.oceaannummer){
+        oceaannummer = '.RepConvON {opacity: 0.04 !important;}';
+    } else oceaannummer = "";
     var css = [
         "input {",
         " color: black;",
@@ -498,15 +495,13 @@ function setCSS() {
         "    opacity: 0.0;",
         "  }",
         "}",
+        oceaannummer,
         "@keyframes blink-animation2 {",
         "90% {",
         "    outline-style: solid;",
         "  outline-color: limegreen;",
         "   outline-offset: 0px;",
         "  }",
-        "}",
-        ".RepConvON {",
-        "	opacity: 0.04 !important;",
         "}",
         ".tile.lvl1 {",
         "	opacity: 0.6;",
