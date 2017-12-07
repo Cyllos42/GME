@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.9.d
+// @version      1.9.e
 // @grant GM_setValue
 // @grant GM_getValue
 // ==/UserScript==
@@ -162,22 +162,25 @@ function doSettings() {
     var windowItem = null;
     console.log('GME: Looking for settings');
     for(var item of document.getElementsByClassName('ui-dialog-title')){
-        if(item.innerHTML == "GME Settings"){
+        if(item.innerHTML == "Grepolis Map Enhancer Settings"){
             console.log('GME: Settings clicked!');
             windowExists = true;
             windowItem = item;
         }
     }
-    if(!windowExists) Layout.wnd.Create(43, "GME Settings"); console.log('GME: Creating settings window');
+    if(!windowExists) wnd = Layout.wnd.Create(Layout.wnd.TYPE_DIALOG, "GME Settings"); console.log('GME: Creating settings window');
+    wnd.setContent('');
     for(item of document.getElementsByClassName('ui-dialog-title')){
         if(item.innerHTML == "GME Settings"){
             console.log('GME: Found settings!');
             windowItem = item;
         }
     }
+    wnd.setHeight('500');
+    wnd.setWidth('800');
+    wnd.setTitle('Grepolis Map Enhancer Settings');
     console.log('Opened settings');
     title = windowItem;
-    title.innerHTML = "Grepolis Map Enhancer Instellingen";
     frame = title.parentElement.parentElement.children[1].children[4];
     frame.innerHTML = '';
     var html = document.createElement('html');
@@ -342,8 +345,8 @@ function doSettings() {
 
     element = document.createElement('a');
     childElement = document.createElement('p');
-    childElement.innerHTML = 'Bitcoin: 38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7';
-    childElement.innerHTML += '<br>Gridcoin: SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b';
+    childElement.innerHTML = 'BTC: 38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7';
+    childElement.innerHTML += '<br>GRC: SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b';
     element.appendChild(childElement);
     element.style.position = 'absolute';
     element.style.bottom = "0";
