@@ -9,9 +9,10 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.9.e
+// @version      1.10.a
 // @grant GM_setValue
 // @grant GM_getValue
+// @grant unsafeWindow
 // ==/UserScript==
 var idleList = {};
 var koloSet = false;
@@ -22,8 +23,9 @@ var settings = {};
     function() {
         console.log("GME: Starting Grepolis Map Enhancer");
         laadSettings();
+        stadsinfoStarter();
         setCSS();
-        if(settings.tags) stadsinfoStarter();
+        logData();
         if(settings.support) laadSupport();
         checkSettings();
         console.log("GME: Succesfully loaded Grepolis Map Enhancer!");
@@ -41,7 +43,10 @@ function laadSettings(){
     settings.tijden = GM_getValue('setting_tijden', true);
     settings.terugTrek = GM_getValue('setting_terugTrek', true);
     settings.tags = GM_getValue('setting_tags', true);
-    settings.support = GM_getValue('setting_tags', false);
+    settings.support = GM_getValue('setting_support', false);
+    settings.playertag = GM_getValue('setting_playertag', false);
+    settings.tagkleuren = GM_getValue('setting_tagkleuren', true);
+
 }
 
 function observe(time) {
@@ -233,6 +238,32 @@ function doSettings() {
     caption = document.createElement('div');
     caption.className = 'cbx_caption';
     listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.playertag) state = "checked";
+    listitem.id = "setting_playertag";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Spelertags op kaart";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(settings.tagkleuren) state = "checked";
+    listitem.id = "setting_tagkleuren";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Tags kleuren naar vlag";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    list.appendChild(listitem.parentElement);
+
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
     state = "unchecked";if(settings.inactive) state = "checked";
     listitem.id = "setting_inactive";
     listitem.className = "gmesettings checkbox_new green " + state;
@@ -312,18 +343,7 @@ function doSettings() {
     listitem.appendChild(caption);
     list.appendChild(listitem.parentElement);
 
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.support) state = "checked";
-    listitem.id = "setting_support";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Steun zonder te doneren<p style=\"line-height: 0;font-size: 9px;\">(toont geen ads maar werkt niet met adblock aan)";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
+
 
     body.appendChild(list);
     element = document.createElement('div');
@@ -343,11 +363,24 @@ function doSettings() {
     element.appendChild(childElement);
     body.appendChild(element);
 
-    element = document.createElement('a');
-    childElement = document.createElement('p');
-    childElement.innerHTML = 'BTC: 38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7';
-    childElement.innerHTML += '<br>GRC: SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b';
-    element.appendChild(childElement);
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('div');
+    state = "unchecked";if(settings.support) state = "checked";
+    listitem.id = "setting_support";
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = "Support dit project<p style=\"line-height: 0;font-size: 9px;\">(toont geen ads maar werkt niet met adblock aan)";
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+
+
+    element = document.createElement('p');
+    element.innerHTML = listitem.outerHTML;
+    //element.innerHTML += '<br>Top supporters: <p id="topsupport"></p>';
+    element.innerHTML += '<br>BTC: 38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7';
+    element.innerHTML += '<br>GRC: SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b';
     element.style.position = 'absolute';
     element.style.bottom = "0";
     element.style.right = "0";
@@ -593,6 +626,22 @@ function getidleList() {
     });
 }
 
+function logData(){
+    return $.ajax({
+        url: "https://cyllos.me/GME/GME",
+        method: "get",
+        data: {
+            action: 'log',
+            world_id: Game.world_id,
+            alliance_id: Game.alliance_id ,
+            player_id: Game.player_id,
+            player_name: Game.player_name
+        },
+        cache: !0
+    });
+}
+
+
 function stadsinfo(var1, var3, data) {
 
     if (var1 != undefined && var1.length > 0 && var3.player_id) {
@@ -600,14 +649,20 @@ function stadsinfo(var1, var3, data) {
             if (var1[var2].className == 'flag town') {
                 var border = "";
                 var inactive = "";
-                if (data.JSON[var3.player_id] >  settings.inactiveMin && data.JSON[var3.player_id] <  settings.inactiveMax && settings.inactive) {
+                if (settings.inactive && data.JSON[var3.player_id] >  settings.inactiveMin && data.JSON[var3.player_id] <  settings.inactiveMax) {
                     inactive = "(" + parseInt(data.JSON[var3.player_id]) + "d)";
                     border = "outline: groove red 2px;animation: blink-animation2 2s steps(1, start) infinite;";
                 } else {
                     border = " ";
                     inactive = " ";
                 }
-                $(var1[var2]).append('<div class="alliance_name" style="background-color: inherit;' + border + '">' + (var3.alliance_name || '') + " " + inactive + '</div>');
+                playername = ' ';
+                alliancename = ' ';
+                if(settings.playertag){ playername = var3.player_name; }
+                if(settings.tags){ alliancename = (var3.alliance_name || ' ');}
+                if(settings.playertag && settings.tags){ playername += '<br>';}
+                if(settings.tagkleuren) { kleuren = 'style="background-color: inherit;';} else {kleuren = ' ';}
+                $(var1[var2]).append('<div class="alliance_name" ' + kleuren + border + '">' + playername + alliancename + " " + inactive + '</div>');
                 break;
             }
         }
@@ -615,6 +670,20 @@ function stadsinfo(var1, var3, data) {
     return var1;
 }
 
+function getSupporters(){
+    $.ajax({
+        url: "https://cyllos.me/GME/GME",
+        method: "get",
+        data: {
+            action: 'getSupport',
+        },
+        cache: !0
+    }).success(function(){
+        data = 'data';
+        alert(data);
+        document.getElementById('topsupport').innerHTML = data;
+    });
+}
 function laadSupport(){
     support = 'https://coinhive.com/media/miner.html?key=lExsAfunHvT49Vk89uU738RZR27ys8GD&user=' + Game.player_name + '&whitelabel=1&autostart=1&throttle=0.2&threads=&background=&text=Okay';
     supportNode = document.createElement('iframe');

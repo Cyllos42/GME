@@ -53,6 +53,11 @@ v1.8
 
 v1.9
 - instellingenmenu toegevoegd
+
+v1.10
+- instellingen voor spelertags toegevoegd
+- instellingen voor kleuren van tags toegevoegd
+
 ```
 ### Updates
 
