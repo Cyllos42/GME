@@ -9,10 +9,9 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.10.a
+// @version      1.10.b
 // @grant GM_setValue
 // @grant GM_getValue
-// @grant unsafeWindow
 // ==/UserScript==
 var idleList = {};
 var koloSet = false;
@@ -207,70 +206,11 @@ function doSettings() {
     var caption = document.createElement('div');
     caption.className = 'cbx_caption';
 
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.oceaannummer) state = "checked";
-    listitem.id = "setting_oceaannummer";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Minder felle oceaancijfers (GRCRT) op kaart";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
-
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.tags) state = "checked";
-    listitem.id = "setting_tags";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Alliantietags op kaart";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
-
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.playertag) state = "checked";
-    listitem.id = "setting_playertag";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Spelertags op kaart";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
-
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.tagkleuren) state = "checked";
-    listitem.id = "setting_tagkleuren";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Tags kleuren naar vlag";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
-
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.inactive) state = "checked";
-    listitem.id = "setting_inactive";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Inactieve spelers op kaart";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
+    list.appendChild(addCheckbox(settings.oceaannummer, 'setting_oceaannummer', "Minder felle oceaancijfers (GRCRT) op kaart"));
+    list.appendChild(addCheckbox(settings.tags,"setting_tags","Alliantietags op kaart"));
+    list.appendChild(addCheckbox(settings.playertag,"setting_playertag","Spelertags op kaart"));
+    list.appendChild(addCheckbox(settings.tagkleuren,"setting_tagkleuren","Tags kleuren naar vlag"));
+    list.appendChild(addCheckbox(settings.inactive,"setting_inactive","Inactieve spelers op kaart"));
 
     listitem = document.createElement('p');
     listitem.innerHTML = "Minimum tot maximum dagen inactief";
@@ -291,59 +231,10 @@ function doSettings() {
     listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="setting_inactiveMax" value="' + settings.inactiveMax + '" size="10" type="text"></div></div>';
     list.appendChild(listitem);
 
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.koloanimatie) state = "checked";
-    listitem.id = "setting_koloanimatie";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Kolonisatieschip animatie";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
-
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.colors) state = "checked";
-    listitem.id = "setting_colors";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Kleuren op het forum";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
-
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.tijden) state = "checked";
-    listitem.id = "setting_tijden";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Tijden bij commando";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
-
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(settings.terugTrek) state = "checked";
-    listitem.id = "setting_terugTrek";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Laatste terugtrek bij commando";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
-    list.appendChild(listitem.parentElement);
-
-
+    list.appendChild(addCheckbox(settings.koloanimatie,"setting_koloanimatie","Kolonisatieschip animatie"));
+    list.appendChild(addCheckbox(settings.colors,"setting_colors","Kleuren op het forum"));
+    list.appendChild(addCheckbox(settings.tijden,"setting_tijden","Tijden bij commando"));
+    list.appendChild(addCheckbox(settings.terugTrek,"setting_terugTrek","Laatste terugtrek bij commando"));
 
     body.appendChild(list);
     element = document.createElement('div');
@@ -363,35 +254,28 @@ function doSettings() {
     element.appendChild(childElement);
     body.appendChild(element);
 
-    checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-    listitem = document.createElement('div');
-    state = "unchecked";if(settings.support) state = "checked";
-    listitem.id = "setting_support";
-    listitem.className = "gmesettings checkbox_new green " + state;
-    caption.innerHTML = "Support dit project<p style=\"line-height: 0;font-size: 9px;\">(toont geen ads maar werkt niet met adblock aan)";
-    listitem.appendChild(checkbox);
-    listitem.appendChild(caption);
+    listitem = addCheckbox(settings.support,"setting_support","Support dit project<p style=\"line-height: 0;font-size: 9px;\">(toont geen ads maar werkt niet met adblock aan)</p>");
 
-
+    getSupporters();
+    getSupportPlayer();
     element = document.createElement('p');
     element.innerHTML = listitem.outerHTML;
-    //element.innerHTML += '<br>Top supporters: <p id="topsupport"></p>';
-    element.innerHTML += '<br>BTC: 38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7';
+    element.innerHTML += '<p id="playersupport"></p>';
+    element.innerHTML += '<p id="topsupport"></p>';
+    element.innerHTML += 'BTC: 38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7';
     element.innerHTML += '<br>GRC: SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b';
-    element.style.position = 'absolute';
-    element.style.bottom = "0";
-    element.style.right = "0";
+    element.id = 'supportbox';
     body.appendChild(element);
 
     element = document.createElement('p');
     element.innerHTML = 'Grepolis Map Enhancer v.' + GM_info.script.version;
     element.innerHTML += '<br>Copyright &copy; cyllos ' + Timestamp.toDate(Timestamp.server()).getFullYear();
+    element.innerHTML += '<br><p style="font-size: xx-small">contact: <a href="mailto:cyllos@cobrasec.org">cyllos@cobrasec.org</a></p>';
     element.style.position = 'absolute';
     element.style.bottom = "0";
     element.style.left = "0";
+    element.style.marginBottom = "0";
+    element.style.lineHeight =  "1";
     body.appendChild(element);
 
     html.appendChild(head);
@@ -426,8 +310,24 @@ function checkSettings() {
     }
 }
 
+function addCheckbox(setting, id, beschrijving){
+    checkbox = document.createElement('div');
+    checkbox.className = 'cbx_icon';
+    caption = document.createElement('div');
+    caption.className = 'cbx_caption';
+    listitem = document.createElement('li').appendChild(document.createElement('div'));
+    state = "unchecked";if(setting) state = "checked";
+    listitem.id = id;
+    listitem.className = "gmesettings checkbox_new green " + state;
+    caption.innerHTML = beschrijving;
+    listitem.appendChild(checkbox);
+    listitem.appendChild(caption);
+    return listitem.parentElement;
+}
+
 function koloAnimatie() {
     for (var item of document.getElementsByClassName("attack_takeover")) {
+        if(item.parentNode.parentNode.parentNode.parentNode.innerHTML == 'attack_overview'){ break;}
         if(/support_filter/.test(item.className)) break;
         if (koloSet == false) {
             startTime = item.parentNode.parentNode.dataset.starttime;
@@ -545,6 +445,16 @@ function setCSS() {
         "",
         ".tile.lvl2 {",
         "	opacity: 0.7;",
+        "}",
+        "#supportbox{",
+        "  position: absolute;",
+        "  bottom: 0px;",
+        "  right: 0px;",
+        "  list-style: none;",
+        "  border: 1px rgba(0, 0, 0, 0.4) dashed;",
+        "  padding: 10px;",
+        "  line-height: 1.2;",
+        "  font-size: 12px;",
         "}",
         "",
         "#questlog .questlog_icon {",
@@ -678,10 +588,27 @@ function getSupporters(){
             action: 'getSupport',
         },
         cache: !0
-    }).success(function(){
-        data = 'data';
-        alert(data);
-        document.getElementById('topsupport').innerHTML = data;
+    }).success(function(data){
+        supporters = JSON.parse(data).users;
+        document.getElementById('topsupport').innerHTML = 'Top supporters: <br>1: ' + supporters[0].name + ' (' + parseInt(supporters[0].total/10000) + ' punten) <br>2: ' +
+            supporters[1].name + ' (' + parseInt(supporters[1].total/10000) + ' punten) <br>3: ' +
+            supporters[2].name + ' (' + parseInt(supporters[2].total/10000) + ' punten)';
+    });
+}
+
+function getSupportPlayer(){
+    $.ajax({
+        url: "https://cyllos.me/GME/GME",
+        method: "get",
+        data: {
+            action: 'getSupport',
+            player: Game.player_name
+        },
+        cache: !0
+    }).success(function(data){
+        supporters = JSON.parse(data);
+        if(supporters.success) document.getElementById('playersupport').innerHTML = 'Jouw punten: ' +parseInt(supporters.total/10000);
+        else document.getElementById('playersupport').innerHTML = 'Jouw punten: 0';
     });
 }
 function laadSupport(){
