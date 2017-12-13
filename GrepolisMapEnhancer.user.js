@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.10.b
+// @version      1.10.c
 // @grant GM_setValue
 // @grant GM_getValue
 // ==/UserScript==
