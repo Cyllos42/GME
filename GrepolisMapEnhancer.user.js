@@ -442,7 +442,6 @@ function koloAnimatie() {				// indien gewenst, check of er een koloanimatie wee
                 document.documentElement.appendChild(node);
                 // }
             }
-
         } else if(totalTime == -1) { // verwijder alles als de kolo er is
             css = [
                 "#koloboot{",
