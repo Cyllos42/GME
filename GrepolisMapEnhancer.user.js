@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.11
+// @version      1.11.a
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant unsafeWindow
@@ -54,7 +54,7 @@ function laadSettings(){	// laad de settings van de gebruiker zijn browser
     settings.playertag = GM_getValue('setting_playertag', false);
     settings.tagkleuren = GM_getValue('setting_tagkleuren', true);
     settings.discord = GM_getValue('setting_discord', true);
-    settings.discordhook = GM_getValue('setting_discordhook', '[voeg hier web hook toe]');
+    settings.discordhook = GM_getValue('setting_discordhook' + UWGame.world_id, '[voeg hier web hook toe]');
 }
 
 function observe(time) {	// start observe module die kijkt voor veranderingen
@@ -348,7 +348,7 @@ function doSettings() {					// functie die het instellingenmenu maakt
 		// zeg wat er moet gebeuren als met op een checkbox klikt
     $(".gmesettings").click(function(){toggleSetting(this);});
 		// zeg wat er moet gebeuren als er op herladen gedrukt wordt. Dit slaat de inputvelden op en herlaadt de pagina
-    $("#settings_reload").click(function(){GM_setValue('setting_inactiveMin', $('#setting_inactiveMin').val()); GM_setValue('setting_inactiveMax', $('#setting_inactiveMax').val());GM_setValue('setting_discordhook', $('#setting_discordhook').val());window.location.reload(true); });
+    $("#settings_reload").click(function(){GM_setValue('setting_inactiveMin', $('#setting_inactiveMin').val()); GM_setValue('setting_inactiveMax', $('#setting_inactiveMax').val());GM_setValue('setting_discordhook' + UWGame.world_id, $('#setting_discordhook').val());window.location.reload(true); });
 }
 function toggleSetting(element) { // functie voor het aan en uit zetten van een module
     $('#' + element.id).toggleClass("checked");
