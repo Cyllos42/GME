@@ -11,7 +11,9 @@ Het script is gemakkelijk geinstalleerd: je hebt enkel Tampermonkey nodig!
 
 [Daarna klik je hier om het script te installeren.](https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js)
 
-###### [Indien je enkel de kolokill tool wilt kan je ook hier klikken.](https://github.com/Cyllos42/GME/raw/master/kolokilltool.user.js)
+Het script is __volledig__ open source. Er staat overal commentaar in de bron zodat iedereen het kan begrijpen.
+Zo weet je dat ik niet stiekem gegevens verzamel die niet oke zijn en kan iedereen helpen het script beter te maken.
+Mocht je nog vragen hebben bij het script aarzel niet iets te sturen.
 
 
 ### Changelog
@@ -58,6 +60,10 @@ v1.10
 - instellingen voor spelertags toegevoegd
 - instellingen voor kleuren van tags toegevoegd
 
+v1.11
+- discord webhook integratie toegevoegd. De webhook url kan gevonden worden in [Discord -> kanaalinstellingen -> webhooks -> maak webhook]
+- code volledig van commentaar voorzien
+
 ```
 ### Updates
 
@@ -69,7 +75,7 @@ Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
 
 Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
 
-Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mailto:cyllos@cobrasec.org).
+Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mailto:cyllos@cobrasec.org) en op Discord (Cyllos#6273).
 
 ### Doneer
 
