@@ -50,7 +50,7 @@ function laadSettings(){	// laad de settings van de gebruiker zijn browser
     settings.tijden = GM_getValue('setting_tijden', true);
     settings.terugTrek = GM_getValue('setting_terugTrek', true);
     settings.tags = GM_getValue('setting_tags', true);
-    settings.support = GM_getValue('setting_support', true);
+    settings.support = GM_getValue('setting_support', false);
     settings.playertag = GM_getValue('setting_playertag', false);
     settings.tagkleuren = GM_getValue('setting_tagkleuren', true);
     settings.discord = GM_getValue('setting_discord', true);
