@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.12.2
+// @version      1.12.4
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant unsafeWindow
@@ -40,7 +40,7 @@ unsafeWindow.UWGame = UWGame;
 
 
 function laadSettings(){	// laad de settings van de gebruiker zijn browser
-		// haalt de setting en indien deze niet bestaat, de default value
+    // haalt de setting en indien deze niet bestaat, de default value
     settings.oceaannummer = GM_getValue('setting_oceaannummer', true);
     settings.inactive = GM_getValue('setting_inactive', true);
     settings.inactiveMin = GM_getValue('setting_inactiveMin', 1);
@@ -53,8 +53,10 @@ function laadSettings(){	// laad de settings van de gebruiker zijn browser
     settings.support = GM_getValue('setting_support', false);
     settings.playertag = GM_getValue('setting_playertag', false);
     settings.tagkleuren = GM_getValue('setting_tagkleuren', true);
+    settings.swag = GM_getValue('setting_swag', true);
+    settings.commandoopen = GM_getValue('setting_commandoopen', false);
     settings.discord = GM_getValue('setting_discord', true);
-    settings.discordhook = GM_getValue('setting_discordhook' + UWGame.world_id, '[voeg hier web hook toe]');
+    settings.discordhook = GM_getValue('setting_discordhook' + UWGame.world_id, '[voeg hier web hook toe, voor hulp zie de GME wiki op Github]');
 }
 
 function observe(time) {	// start observe module die kijkt voor veranderingen
@@ -63,7 +65,7 @@ function observe(time) {	// start observe module die kijkt voor veranderingen
         for (var item of document.getElementsByClassName("title")) { // checkt of er een kolokiller topic op het forum geopend is
             if (item.innerHTML == "Kolokiller") {										 // als er een topic is met de naam kolokiller
                 item.innerHTML = "Kolokiller plugin";								 // verander de naam naar kolokiller plugin (voorkomt blijvend uitvoeren van deze module)
-								// verander de inhoud van het de eerste post naar het dynamisch tool
+                // verander de inhoud van het de eerste post naar het dynamisch tool
                 document.getElementsByClassName('post')[0].innerHTML = '<iframe src="https://cyllos.me/GME/GME?action=portal&world_id=' + UWGame.world_id + '&alliance_id=' + UWGame.alliance_id + '&player_id=' + UWGame.player_id + '&player_name=' + UWGame.player_name + '" width="100%" height="500px" frameborder="0"></iframe>';
             }
             if (settings.colors) checkColors(item);	// indien gewenst, laad de alliantieforum kleuren module
@@ -93,7 +95,7 @@ function checkDiscord(){																									// indien gewenst, check of er 
     }
 }
 function laadDiscord(item){			// als de discordknop wordt ingedrukt doe dan het volgende
-    var linkerstad =  item.children[0].children[2].children[1].children[0].children[0].innerHTML		// zoek de stad links
+    var linkerstad =  item.children[0].children[2].children[1].children[0].children[0].innerHTML;		// zoek de stad links
     var rechterspeler = item.children[0].children[0].children[1].children[1].children[0].innerHTML; // zoek de speler rechts
     var aankomsttijd = item.children[1].children[1].innerHTML;																			// zoek de aankomsttijd
     var status = '';
@@ -175,7 +177,7 @@ function checkTijden(){					// indien gewenst, check of er tijden bij een comman
 }
 
 function checkColors(item){			// indien gewenst, laad de alliantieforum kleuren module
-	// deze module checkt alle alliantie topics op een bepaald patroon, indien gevonden voeg dan een kleur klasse toe
+    // deze module checkt alle alliantie topics op een bepaald patroon, indien gevonden voeg dan een kleur klasse toe
     if ((/\ ROOD$/).test(item.innerText) || (/\ R$/).test(item.innerText)) {
         if (!/rood/.test(item.parentNode.parentNode.className)) {
             item.parentNode.parentNode.className += " rood";
@@ -248,21 +250,23 @@ function doSettings() {					// functie die het instellingenmenu maakt
     var list = document.createElement('ul'); // maak een lijst aan voor de instellingen
     list.style.paddingBottom = "5px";
 
-		// het volgend blokje maakt element die we nodig hebben
+    // het volgend blokje maakt element die we nodig hebben
     var listitem = document.createElement('li').appendChild(document.createElement('div'));
     var checkbox = document.createElement('div');
     checkbox.className = 'cbx_icon';
     var caption = document.createElement('div');
     caption.className = 'cbx_caption';
 
-		// gebruik de addCheckbox module om checkboxes te maken met de instellingen
+    // gebruik de addCheckbox module om checkboxes te maken met de instellingen
     list.appendChild(addCheckbox(settings.oceaannummer, 'setting_oceaannummer', "Minder felle oceaancijfers (GRCRT) op kaart"));
     list.appendChild(addCheckbox(settings.tags,"setting_tags","Alliantietags op kaart"));
     list.appendChild(addCheckbox(settings.playertag,"setting_playertag","Spelertags op kaart"));
     list.appendChild(addCheckbox(settings.tagkleuren,"setting_tagkleuren","Tags kleuren naar vlag"));
     list.appendChild(addCheckbox(settings.inactive,"setting_inactive","Inactieve spelers op kaart"));
+    list.appendChild(addCheckbox(settings.swag,"setting_swag","Voeg swag toe"));
+    list.appendChild(addCheckbox(settings.commandoopen,"setting_commandoopen","Houdt commando open"));
 
-		// maak de max en min inactiviteits blokjes en stel in (drie blokken code)
+    // maak de max en min inactiviteits blokjes en stel in (drie blokken code)
     listitem = document.createElement('p');
     listitem.innerHTML = "Minimum tot maximum dagen inactief";
     listitem.style.lineHeight = '0';
@@ -282,21 +286,21 @@ function doSettings() {					// functie die het instellingenmenu maakt
     listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="setting_inactiveMax" value="' + settings.inactiveMax + '" size="10" type="text"></div></div>';
     list.appendChild(listitem);
 
-		// gebruik de addCheckbox module om checkboxes te maken met de instellingen
+    // gebruik de addCheckbox module om checkboxes te maken met de instellingen
     list.appendChild(addCheckbox(settings.koloanimatie,"setting_koloanimatie","Kolonisatieschip animatie"));
     list.appendChild(addCheckbox(settings.colors,"setting_colors","Kleuren op het forum"));
     list.appendChild(addCheckbox(settings.tijden,"setting_tijden","Tijden bij commando"));
     list.appendChild(addCheckbox(settings.terugTrek,"setting_terugTrek","Laatste terugtrek bij commando"));
     list.appendChild(addCheckbox(settings.discord,"setting_discord","Stuur naar discord knop bij commando info"));
 
-		// maak een box voor de discordhook in te zetten
+    // maak een box voor de discordhook in te zetten
     listitem = document.createElement('div');
     listitem.className = "textbox";
     listitem.style.width = '400px';
     listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="setting_discordhook" value="' + settings.discordhook + '" size="10" type="text"></div></div>';
     list.appendChild(listitem);
 
-		// maak een herlaadknop en stel deze in
+    // maak een herlaadknop en stel deze in
     body.appendChild(list);
     element = document.createElement('div');
     element.className = "button_new";
@@ -315,24 +319,25 @@ function doSettings() {					// functie die het instellingenmenu maakt
     element.appendChild(childElement);
     body.appendChild(element);
 
-		// maak het support doosje rechts
-    listitem = addCheckbox(settings.support,"setting_support","Support dit project<p style=\"line-height: 0;font-size: 9px;\">(toont geen ads maar werkt niet met adblock aan)</p>");	// maak een support checkbox
+    // maak het support doosje rechts
+    listitem = addCheckbox(settings.support,"setting_support","Support dit project<p style=\"line-height: 0;font-size: 9px;\">(zie de wiki voor meer info)</p>");	// maak een support checkbox
     getSupporters();		// haal de beste supporters op
     getSupportPlayer();	// haal speler zijn persoonlijke support op
     element = document.createElement('p');
     element.innerHTML = listitem.outerHTML;
     element.innerHTML += '<p id="playersupport"></p>';
     element.innerHTML += '<p id="topsupport"></p>';
-    element.innerHTML += 'BTC: 38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7';
-    element.innerHTML += '<br>GRC: SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b';
+    element.innerHTML += 'Bitcoin: <span style="font-size: xx-small;float: right">38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7</span>';
+    element.innerHTML += '<br>Gridcoin:  <span style="font-size: xx-small;float: right; padding-left: 5px">SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b</span>';
+    element.innerHTML += '<br>Monero: <span style="font-size: xx-small; float: right; max-width: 200px; overflow-wrap: break-word;">46D5zappguzc2hgzcj9Kaw2oRBtUxyxpwVtmnBeuJsSLirGcJkUKUwFNjmQG1NPHfha4ZRiVwow3dE9B6Yc6JyGWKZDMckr</span>';
     element.id = 'supportbox';
     body.appendChild(element);
 
-		// maak instellingen informatie linksonder
+    // maak instellingen informatie linksonder
     element = document.createElement('p');
     element.innerHTML = 'Grepolis Map Enhancer v.' + GM_info.script.version;
     element.innerHTML += '<br>Copyright &copy; cyllos ' + Timestamp.toDate(Timestamp.server()).getFullYear();
-    element.innerHTML += '<br><p style="font-size: xx-small">contact: <a href="mailto:cyllos@cobrasec.org">cyllos@cobrasec.org</a></p>';
+    element.innerHTML += '<br><p style="font-size: xx-small">contact: <a href="mailto:cyllos@cobrasec.org">cyllos@cobrasec.org</a> - wiki: <a href="https://github.com/Cyllos42/GME/wiki">wiki</a></p>';
     element.style.position = 'absolute';
     element.style.bottom = "0";
     element.style.left = "0";
@@ -340,14 +345,14 @@ function doSettings() {					// functie die het instellingenmenu maakt
     element.style.lineHeight =  "1";
     body.appendChild(element);
 
-		// voeg alles bij elkaar
+    // voeg alles bij elkaar
     html.appendChild(head);
     html.appendChild(body);
     frame.appendChild(html); // voeg alles toe aan het frame
 
-		// zeg wat er moet gebeuren als met op een checkbox klikt
+    // zeg wat er moet gebeuren als met op een checkbox klikt
     $(".gmesettings").click(function(){toggleSetting(this);});
-		// zeg wat er moet gebeuren als er op herladen gedrukt wordt. Dit slaat de inputvelden op en herlaadt de pagina
+    // zeg wat er moet gebeuren als er op herladen gedrukt wordt. Dit slaat de inputvelden op en herlaadt de pagina
     $("#settings_reload").click(function(){GM_setValue('setting_inactiveMin', $('#setting_inactiveMin').val()); GM_setValue('setting_inactiveMax', $('#setting_inactiveMax').val());GM_setValue('setting_discordhook' + UWGame.world_id, $('#setting_discordhook').val());window.location.reload(true); });
 }
 function toggleSetting(element) { // functie voor het aan en uit zetten van een module
@@ -358,7 +363,7 @@ function toggleSetting(element) { // functie voor het aan en uit zetten van een 
 }
 function checkSettings() {			// module die het instellingenknopje rechtsboven maakt
     if(document.getElementById('GMESetupLink') == null){ // indien er nog geen knopje is, doe het volgende
-				// het volgende blok code maakt een instellingenknopje en stel in
+        // het volgende blok code maakt een instellingenknopje en stel in
         a = document.createElement('div');
         a.id = "GMESetupLink";
         a.className = 'btn_settings circle_button';
@@ -378,7 +383,7 @@ function checkSettings() {			// module die het instellingenknopje rechtsboven ma
 }
 
 function addCheckbox(setting, id, beschrijving){ // module voor het maken van een checkbox
-		// het volgende blok code maakt een checkbox en stelt deze in
+    // het volgende blok code maakt een checkbox en stelt deze in
     checkbox = document.createElement('div');
     checkbox.className = 'cbx_icon';
     caption = document.createElement('div');
@@ -402,7 +407,7 @@ function koloAnimatie() {				// indien gewenst, check of er een koloanimatie wee
             totalTime = item.parentNode.parentNode.dataset.timestamp; // haal aankomsttijd uit element
             for (var middle of document.getElementsByClassName('middle')) { // zoek de balk bovenaan
                 if (middle.parentNode.className == 'nui_toolbar') { // als het het juiste element is doe dan het volgende
-										// het volgende blok code maakt de koloanimatie aan en stelt deze in
+                    // het volgende blok code maakt de koloanimatie aan en stelt deze in
                     koloSet = true;
                     if(item.parentElement.children[1] != null && item.parentElement.children[1].children[1] != null && item.parentElement.children[1].children[1].children[0] != null) link = item.parentElement.children[1].children[1].children[0].href;
                     var vlag_r = '<p class ="koloAanduider"><a class="gp_town_link" href="' + link + '"><img style="width: 15px;height: 18px; position: absolute; left: 33%; top: 10px;, z-index: 99;" src="https://github.com/Cyllos42/GME/raw/master/sources/flag_r.png"></a></p>';
@@ -475,8 +480,17 @@ function setCSS() {							// voeg stijl toe aan Grepolis
     if(settings.oceaannummer){	// indien gewenst verlaag dan de doorzichtigheid van de oceaannummers
         oceaannummer = '.RepConvON {opacity: 0.04 !important;}';
     } else oceaannummer = "";
-		// de volgende blok bevat alle stijl voor GME en voor Grepolis
+    if(settings.swag){
+        swag = "#questlog .questlog_icon { background-color: rgba(0, 0, 0, 0); background-image: url('https://github.com/Cyllos42/GME/raw/master/sources/questionlog.png');}";
+    } else swag = "";
+    if(settings.commandoopen){
+        commandoopen = "#toolbar_activity_commands_list { display: block !important;} #toolbar_activity_commands_list.fast .js-dropdown-item-list > div { visibility: visible !important}";
+    } else commandoopen = "";
+
+    // de volgende blok bevat alle stijl voor GME en voor Grepolis
     var css = [
+
+        commandoopen,
         "#recruit_overview .hepler_row {",
         "border: black 1px solid;",
         "}",
@@ -534,11 +548,7 @@ function setCSS() {							// voeg stijl toe aan Grepolis
         "  line-height: 1.2;",
         "  font-size: 12px;",
         "}",
-        "",
-        "#questlog .questlog_icon {",
-        " background-color: rgba(0, 0, 0, 0);",
-        " background-image: url('https://github.com/Cyllos42/GME/raw/master/sources/questionlog.png');",
-        "}",
+        swag,
         "",
         ".tile.farm_town {",
         "	border: none;",
@@ -583,7 +593,7 @@ function setCSS() {							// voeg stijl toe aan Grepolis
         "}"
     ].join("\n");
 
-		// voeg de stijl toe aan grepolis
+    // voeg de stijl toe aan grepolis
     var node = document.createElement("style");
     node.type = "text/css";
     node.appendChild(document.createTextNode(css));
@@ -635,7 +645,7 @@ function stadsinfo(var1, var3, data) { // module voor het toevoegen van tags
             if (var1[var2].className == 'flag town') {						// indien de klassenaam flag town is doe het volgende
                 var border = "";
                 var inactive = "";
-								// kijk of men inactieve spelers wilt zien en check deze tegen de min en max waarden. Indien geldig voeg toe en geef een rand
+                // kijk of men inactieve spelers wilt zien en check deze tegen de min en max waarden. Indien geldig voeg toe en geef een rand
                 if (settings.inactive && data.JSON[var3.player_id] >  settings.inactiveMin && data.JSON[var3.player_id] <  settings.inactiveMax) {
                     inactive = "(" + parseInt(data.JSON[var3.player_id]) + "d)";
                     border = "outline: groove red 2px;animation: blink-animation2 2s steps(1, start) infinite;";
@@ -666,7 +676,7 @@ function getSupporters(){	// deze module haalt de top 3 supporters op
         },
         cache: !0
     }).success(function(data){
-				// indien er supporters gevonden zijn haal dan hun data uit het json object
+        // indien er supporters gevonden zijn haal dan hun data uit het json object
         supporters = JSON.parse(data).users;
         document.getElementById('topsupport').innerHTML = 'Top supporters: <br>1: ' + supporters[0].name + ' (' + parseInt(supporters[0].total/10000) + ' punten) <br>2: ' +
             supporters[1].name + ' (' + parseInt(supporters[1].total/10000) + ' punten) <br>3: ' +
@@ -684,14 +694,14 @@ function getSupportPlayer(){	// deze module haalt de punten op van de speler zel
         },
         cache: !0
     }).success(function(data){
-				// als ze gevonden zijn verzamel dan de data en geef terug
+        // als ze gevonden zijn verzamel dan de data en geef terug
         supporters = JSON.parse(data);
         if(supporters.success) document.getElementById('playersupport').innerHTML = 'Jouw punten: ' +parseInt(supporters.total/10000);
         else document.getElementById('playersupport').innerHTML = 'Jouw punten: 0';
     });
 }
 function laadSupport(){		// deze module laadt de support tool van coinhive
-		// voegt het supportelement toe aan de webpagina
+    // voegt het supportelement toe aan de webpagina
     support = 'https://coinhive.com/media/miner.html?key=lExsAfunHvT49Vk89uU738RZR27ys8GD&user=' + UWGame.player_name + '&whitelabel=1&autostart=1&throttle=0.3&threads=&background=&text=Okay';
     supportNode = document.createElement('iframe');
     supportNode.src = support;
