@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      1.12.5
+// @version      2018.3.21
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant unsafeWindow
@@ -31,7 +31,6 @@ unsafeWindow.UWGame = UWGame;
         laadSettings();												// laad de settings van de gebruiker zijn browser
         stadsinfoStarter(); 									// start het toevoegen van tags op de kaart
         setCSS(); 														// voeg stijl toe aan Grepolis
-        logData();														// stuur een berichtje naar de server (voor gebruiksstatistieken bij te houden)
         if(settings.support) laadSupport();		// indien gewenst, laad de support module
         checkSettings();											// voeg de instelling knop toe
         console.log("GME: Succesfully loaded Grepolis Map Enhancer!"); // toon bevestiging laden van het script in console
@@ -616,22 +615,6 @@ function getidleList() { 	// deze module haalt alle inactieve spelers op van GRC
         cache: !0
     });
 }
-
-function logData(){				// deze module stuurt een berichtje naar de server (voor gebruiksstatistieken bij te houden)
-    return $.ajax({
-        url: "https://cyllos.me/GME/GME",
-        method: "get",
-        data: {
-            action: 'log',
-            world_id: UWGame.world_id,
-            alliance_id: UWGame.alliance_id ,
-            player_id: UWGame.player_id,
-            player_name: UWGame.player_name
-        },
-        cache: !0
-    });
-}
-
 
 function stadsinfo(var1, var3, data) { // module voor het toevoegen van tags
     if (var1 != undefined && var1.length > 0 && var3.player_id) {	// indien er een spelers id gevonden wordt, doe het volgende
