@@ -320,7 +320,7 @@ function doSettings() {					// functie die het instellingenmenu maakt
 
     element = document.createElement('p');
     element.innerHTML = listitem.outerHTML;
-    element.innerHTML += 'Gridcoin:  <span style="font-size: xx-small;float: right; padding-left: 5px">SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b</span>';
+    element.innerHTML += 'Gridcoin: SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b';
     element.id = 'supportbox';
     body.appendChild(element);
 
@@ -328,7 +328,7 @@ function doSettings() {					// functie die het instellingenmenu maakt
     element = document.createElement('p');
     element.innerHTML = 'Grepolis Map Enhancer v.' + GM_info.script.version;
     element.innerHTML += '<br>Copyright &copy; cyllos ' + Timestamp.toDate(Timestamp.server()).getFullYear();
-    element.innerHTML += '<br><p style="font-size: xx-small">contact: <a href="mailto:cyllos@cobrasec.org">cyllos@cobrasec.org</a> - wiki: <a href="https://github.com/Cyllos42/GME/wiki">wiki</a></p>';
+    element.innerHTML += '<br><p style="font-size: xx-small">contact: <a href="mailto:contact@cyllos.me">contact@cyllos.me</a> - wiki: <a href="https://github.com/Cyllos42/GME/wiki">wiki</a></p>';
     element.style.position = 'absolute';
     element.style.bottom = "0";
     element.style.left = "0";
