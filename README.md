@@ -35,13 +35,3 @@ Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
 Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
 
 Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mailto:cyllos@cobrasec.org) en op Discord (Cyllos#6273).
-
-### Doneer
-
-Mocht je mijn script handig vinden kan je altijd doneren :)
-
-Bitcoin: `38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7`
-
-Gridcoin: `SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b`
-
-Monero: `46D5zappguzc2hgzcj9Kaw2oRBtUxyxpwVtmnBeuJsSLirGcJkUKUwFNjmQG1NHfhPa4ZRiVwow3dE9B6Yc6JyGWKZDMckr`
