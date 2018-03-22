@@ -318,6 +318,7 @@ function doSettings() {					// functie die het instellingenmenu maakt
     element.appendChild(childElement);
     body.appendChild(element);
 
+    listitem = document.createElement('div');
     element = document.createElement('p');
     element.innerHTML = listitem.outerHTML;
     element.innerHTML += 'Gridcoin: SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b';
