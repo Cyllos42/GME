@@ -31,7 +31,6 @@ unsafeWindow.UWGame = UWGame;
         laadSettings();												// laad de settings van de gebruiker zijn browser
         stadsinfoStarter(); 									// start het toevoegen van tags op de kaart
         setCSS(); 														// voeg stijl toe aan Grepolis
-        if(settings.support) laadSupport();		// indien gewenst, laad de support module
         checkSettings();											// voeg de instelling knop toe
         console.log("GME: Succesfully loaded Grepolis Map Enhancer!"); // toon bevestiging laden van het script in console
         observe(300);													// start observe module die kijkt voor veranderingen
@@ -365,7 +364,7 @@ function checkSettings() {			// module die het instellingenknopje rechtsboven ma
         img.style.width = '22px';
         img.style.height = '22px';
         img.style.backgroundSize = '100%';
-        a.style.top = '105px';
+        a.style.top = '190px';
         a.style.right = '-4px';
         a.style.zIndex = '10000';
         a.appendChild(img);
