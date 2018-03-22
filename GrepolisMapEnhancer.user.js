@@ -320,9 +320,7 @@ function doSettings() {					// functie die het instellingenmenu maakt
 
     element = document.createElement('p');
     element.innerHTML = listitem.outerHTML;
-    element.innerHTML += 'Bitcoin: <span style="font-size: xx-small;float: right">38DjmGJiSn52Hk4h3aQvy1oCEqAq39zUF7</span>';
-    element.innerHTML += '<br>Gridcoin:  <span style="font-size: xx-small;float: right; padding-left: 5px">SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b</span>';
-    element.innerHTML += '<br>Monero: <span style="font-size: xx-small; float: right; max-width: 200px; overflow-wrap: break-word;">46D5zappguzc2hgzcj9Kaw2oRBtUxyxpwVtmnBeuJsSLirGcJkUKUwFNjmQG1NPHfha4ZRiVwow3dE9B6Yc6JyGWKZDMckr</span>';
+    element.innerHTML += 'Gridcoin:  <span style="font-size: xx-small;float: right; padding-left: 5px">SGNF5BMt3uADgSzm1sKD4LBBt8cS5Fc42b</span>';
     element.id = 'supportbox';
     body.appendChild(element);
 
