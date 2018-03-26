@@ -34,4 +34,5 @@ Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
 
 Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
 
-Je kan hier altijd een issue openen, of me bereiken op [cyllos@cobrasec.org](mailto:cyllos@cobrasec.org) en op Discord (Cyllos#6273).
+Je kan hier altijd een issue openen, of me bereiken op [contact@cyllos.me](mailto:contact@cyllos.me) en op Discord (Cyllos#6273).
+0xBA57A86D
