@@ -9,7 +9,7 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      2018.3.22
+// @version      2018.12.05
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant unsafeWindow
@@ -61,11 +61,11 @@ function observe(time) {	// start observe module die kijkt voor veranderingen
     if(i<10) i++;					// start pas na 10x deze module gebruikt te hebben (voorkomt te snel laden van alles)
     else {
         for (var item of document.getElementsByClassName("title")) { // checkt of er een kolokiller topic op het forum geopend is
-            if (item.innerHTML == "Kolokiller") {										 // als er een topic is met de naam kolokiller
-                item.innerHTML = "Kolokiller plugin";								 // verander de naam naar kolokiller plugin (voorkomt blijvend uitvoeren van deze module)
-                // verander de inhoud van het de eerste post naar het dynamisch tool
-                document.getElementsByClassName('post')[0].innerHTML = '<iframe src="https://cyllos.me/GME/GME?action=portal&world_id=' + UWGame.world_id + '&alliance_id=' + UWGame.alliance_id + '&player_id=' + UWGame.player_id + '&player_name=' + UWGame.player_name + '" width="100%" height="500px" frameborder="0"></iframe>';
-            }
+            // if (item.innerHTML == "Kolokiller") {										 // als er een topic is met de naam kolokiller
+            //     item.innerHTML = "Kolokiller plugin";								 // verander de naam naar kolokiller plugin (voorkomt blijvend uitvoeren van deze module)
+            //     // verander de inhoud van het de eerste post naar het dynamisch tool
+            //     document.getElementsByClassName('post')[0].innerHTML = '<iframe src="https://cyllos.me/GME/GME?action=portal&world_id=' + UWGame.world_id + '&alliance_id=' + UWGame.alliance_id + '&player_id=' + UWGame.player_id + '&player_name=' + UWGame.player_name + '" width="100%" height="500px" frameborder="0"></iframe>';
+            // }
             if (settings.colors) checkColors(item);	// indien gewenst, laad de alliantieforum kleuren module
 
         }
@@ -81,13 +81,7 @@ function observe(time) {	// start observe module die kijkt voor veranderingen
 function checkDiscord(){																									// indien gewenst, check of er een discordknop moet toegevoegd worden
     if(document.getElementById('settings_discord') == null){							// check of er al een discordknop is, indien niet ga voort
         for(var item of document.getElementsByClassName('command_info')){	// zoek het command_info element
-            var element = document.createElement('a');										// maak een knop aan met volgende instellingen
-            element.className = 'button';
-            element.id = 'settings_discord';
-            element.href = '#';
-            element.style = "margin: 2px; position: absolute; bottom: 0px;left: 0;right: unset;";
-            element.innerHTML = '<span class="left"><span class="right"><span class="middle">Discord</span></span></span><span style="clear: both;"></span>';
-            item.appendChild(element);																		// voeg de knop toe aan het comand_info element
+            item.appendChild(addButton("settings_discord", "Discord"));																		// voeg de knop toe aan het comand_info element
             $("#settings_discord").click(function(){laadDiscord(item);});	// zeg wat er moet gebeuren als er op de knop geduwd wordt
         }
     }
@@ -170,19 +164,20 @@ function checkTijden(){					// indien gewenst, check of er tijden bij een comman
                     }
                 }}
         }
-
     }
 }
 
 function checkColors(item){			// indien gewenst, laad de alliantieforum kleuren module
+
     // deze module checkt alle alliantie topics op een bepaald patroon, indien gevonden voeg dan een kleur klasse toe
+
     if ((/\ ROOD$/).test(item.innerText) || (/\ R$/).test(item.innerText)) {
         if (!/rood/.test(item.parentNode.parentNode.className)) {
             item.parentNode.parentNode.className += " rood";
         }
     }
     if ((/\ BLAUW$/).test(item.innerText) || (/\ B$/).test(item.innerText)) {
-        if (!/bauw/.test(item.parentNode.parentNode.className)) {
+        if (!/blauw/.test(item.parentNode.parentNode.className)) {
             item.parentNode.parentNode.className += " blauw";
         }
     }
@@ -211,7 +206,6 @@ function checkColors(item){			// indien gewenst, laad de alliantieforum kleuren 
 function doSettings() {					// functie die het instellingenmenu maakt
     var windowExists = false;
     var windowItem = null;
-    console.log('GME: Looking for settings');
     for(var item of document.getElementsByClassName('ui-dialog-title')){ // kijk of er al een scherm is
         if(item.innerHTML == "Grepolis Map Enhancer Settings"){
             console.log('GME: Settings clicked!');
@@ -248,21 +242,14 @@ function doSettings() {					// functie die het instellingenmenu maakt
     var list = document.createElement('ul'); // maak een lijst aan voor de instellingen
     list.style.paddingBottom = "5px";
 
-    // het volgend blokje maakt element die we nodig hebben
-    var listitem = document.createElement('li').appendChild(document.createElement('div'));
-    var checkbox = document.createElement('div');
-    checkbox.className = 'cbx_icon';
-    var caption = document.createElement('div');
-    caption.className = 'cbx_caption';
-
     // gebruik de addCheckbox module om checkboxes te maken met de instellingen
-    list.appendChild(addCheckbox(settings.oceaannummer, 'setting_oceaannummer', "Minder felle oceaancijfers (GRCRT) op kaart"));
-    list.appendChild(addCheckbox(settings.tags,"setting_tags","Alliantietags op kaart"));
-    list.appendChild(addCheckbox(settings.playertag,"setting_playertag","Spelertags op kaart"));
-    list.appendChild(addCheckbox(settings.tagkleuren,"setting_tagkleuren","Tags kleuren naar vlag"));
-    list.appendChild(addCheckbox(settings.inactive,"setting_inactive","Inactieve spelers op kaart"));
-    list.appendChild(addCheckbox(settings.swag,"setting_swag","Voeg swag toe"));
-    list.appendChild(addCheckbox(settings.commandoopen,"setting_commandoopen","Houdt commando open"));
+    addCheckbox(list, settings.oceaannummer, 'setting_oceaannummer', "Minder felle oceaancijfers (GRCRT) op kaart");
+    addCheckbox(list, settings.tags,"setting_tags","Alliantietags op kaart");
+    addCheckbox(list, settings.playertag,"setting_playertag","Spelertags op kaart");
+    addCheckbox(list, settings.tagkleuren,"setting_tagkleuren","Tags kleuren naar vlag");
+    addCheckbox(list, settings.inactive,"setting_inactive","Inactieve spelers op kaart");
+    addCheckbox(list, settings.swag,"setting_swag","Voeg swag toe");
+    addCheckbox(list, settings.commandoopen,"setting_commandoopen","Houdt commando open");
 
     // maak de max en min inactiviteits blokjes en stel in (drie blokken code)
     listitem = document.createElement('p');
@@ -270,52 +257,23 @@ function doSettings() {					// functie die het instellingenmenu maakt
     listitem.style.lineHeight = '0';
     list.appendChild(listitem);
 
-    listitem = document.createElement('div');
-    listitem.className = "textbox";
-    //listitem.style.float = 'left';
-    listitem.style.width = '60px';
-    listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="setting_inactiveMin" value="' + settings.inactiveMin +' " size="10" type="text"></div></div>';
-    list.appendChild(listitem);
-
-    listitem = document.createElement('div');
-    listitem.className = "textbox";
-    //listitem.style.float = 'left';
-    listitem.style.width = '60px';
-    listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="setting_inactiveMax" value="' + settings.inactiveMax + '" size="10" type="text"></div></div>';
-    list.appendChild(listitem);
+    addTextbox(list, settings.inactiveMin, "setting_inactiveMin", 60);
+    addTextbox(list, settings.inactiveMax, "setting_inactiveMax", 60);
 
     // gebruik de addCheckbox module om checkboxes te maken met de instellingen
-    list.appendChild(addCheckbox(settings.koloanimatie,"setting_koloanimatie","Kolonisatieschip animatie"));
-    list.appendChild(addCheckbox(settings.colors,"setting_colors","Kleuren op het forum"));
-    list.appendChild(addCheckbox(settings.tijden,"setting_tijden","Tijden bij commando"));
-    list.appendChild(addCheckbox(settings.terugTrek,"setting_terugTrek","Laatste terugtrek bij commando"));
-    list.appendChild(addCheckbox(settings.discord,"setting_discord","Stuur naar discord knop bij commando info"));
+    addCheckbox(list, settings.koloanimatie,"setting_koloanimatie","Kolonisatieschip animatie");
+    addCheckbox(list, settings.colors,"setting_colors","Kleuren op het forum");
+    addCheckbox(list, settings.tijden,"setting_tijden","Tijden bij commando");
+    addCheckbox(list, settings.terugTrek,"setting_terugTrek","Laatste terugtrek bij commando");
+    addCheckbox(list, settings.discord,"setting_discord","Stuur naar discord knop bij commando info");
 
     // maak een box voor de discordhook in te zetten
-    listitem = document.createElement('div');
-    listitem.className = "textbox";
-    listitem.style.width = '400px';
-    listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="setting_discordhook" value="' + settings.discordhook + '" size="10" type="text"></div></div>';
-    list.appendChild(listitem);
+    addTextbox(list, settings.discordhook, "setting_discordhook", 400);
 
-    // maak een herlaadknop en stel deze in
+    // Voeg alle elementen toe aan het instellingenscherm.
     body.appendChild(list);
-    element = document.createElement('div');
-    element.className = "button_new";
-    element.id = 'settings_reload';
-    element.style.margin = "2px";
-    childElement = document.createElement('div');
-    childElement.className = 'left';
-    element.appendChild(childElement);
-    childElement = document.createElement('div');
-    childElement.className = 'right';
-    element.appendChild(childElement);
-    childElement = document.createElement('div');
-    childElement.className = 'caption js-caption';
-    childElement.innerHTML = 'Opslaan en herladen<div class="effect js-effect"></div>';
-    element.style.float = 'left';
-    element.appendChild(childElement);
-    body.appendChild(element);
+    // maak een herlaadknop en stel deze in
+    body.appendChild(addButton("settings_reload", "Opslaan en herladen"));
 
     listitem = document.createElement('div');
     element = document.createElement('p');
@@ -341,7 +299,7 @@ function doSettings() {					// functie die het instellingenmenu maakt
     html.appendChild(body);
     frame.appendChild(html); // voeg alles toe aan het frame
 
-    // zeg wat er moet gebeuren als met op een checkbox klikt
+    // zeg wat er moet gebeuren als men op een checkbox klikt
     $(".gmesettings").click(function(){toggleSetting(this);});
     // zeg wat er moet gebeuren als er op herladen gedrukt wordt. Dit slaat de inputvelden op en herlaadt de pagina
     $("#settings_reload").click(function(){GM_setValue('setting_inactiveMin', $('#setting_inactiveMin').val()); GM_setValue('setting_inactiveMax', $('#setting_inactiveMax').val());GM_setValue('setting_discordhook' + UWGame.world_id, $('#setting_discordhook').val());window.location.reload(true); });
@@ -372,21 +330,47 @@ function checkSettings() {			// module die het instellingenknopje rechtsboven ma
         $("#GMESetupLink").click(doSettings); // zegt wat er moet gebeuren met het knopje indien men er op drukt
     }
 }
+function addButton(id, text){
+    var element = document.createElement('div');
+    element.className = "button_new";
+    element.id = id;
+    element.style.margin = "2px";
+    var childElement = document.createElement('div');
+    childElement.className = 'left';
+    element.appendChild(childElement);
+    childElement = document.createElement('div');
+    childElement.className = 'right';
+    element.appendChild(childElement);
+    childElement = document.createElement('div');
+    childElement.className = 'caption js-caption';
+    childElement.innerHTML = text + '<div class="effect js-effect"></div>';
+    element.style.float = 'left';
+    element.appendChild(childElement);
+    return element;
+}
+function addCheckbox(list, setting, id, beschrijving){ // module voor het maken van een checkbox
 
-function addCheckbox(setting, id, beschrijving){ // module voor het maken van een checkbox
     // het volgende blok code maakt een checkbox en stelt deze in
-    checkbox = document.createElement('div');
+    var checkbox = document.createElement('div');
     checkbox.className = 'cbx_icon';
-    caption = document.createElement('div');
+    var caption = document.createElement('div');
     caption.className = 'cbx_caption';
-    listitem = document.createElement('li').appendChild(document.createElement('div'));
-    state = "unchecked";if(setting) state = "checked";
+    var listitem = document.createElement('li').appendChild(document.createElement('div'));
+    var state = "unchecked";if(setting) state = "checked";
     listitem.id = id;
     listitem.className = "gmesettings checkbox_new green " + state;
     caption.innerHTML = beschrijving;
     listitem.appendChild(checkbox);
     listitem.appendChild(caption);
-    return listitem.parentElement; // geeft de checkbox weer terug
+    list.appendChild(listitem.parentElement); // geeft de checkbox weer terug
+}
+
+function addTextbox(list, setting, id, width){
+    listitem = document.createElement('div');
+    listitem.className = "textbox";
+    listitem.style.width = width + 'px';
+    listitem.innerHTML = '<div class="left"></div><div class="right"></div><div class="middle"><div class="ie7fix"><input tabindex="1" id="' + id + '" value="' + setting +'" size="10" type="text"></div></div>';
+    list.appendChild(listitem);
 }
 
 function koloAnimatie() {				// indien gewenst, check of er een koloanimatie weergegeven moet worden [code is niet altijd even stabiel]

@@ -13,8 +13,9 @@ Neem zeker eens een kijkje in de code dus :)
 Mocht je nog vragen hebben bij het script aarzel niet iets te sturen.
 
 ### Screenshots
-![afbeelding van GME](https://github.com/Cyllos42/GME/raw/master/sources/afbeelding.png)
-![afbeelding van GME](https://cdn.discordapp.com/attachments/357957331113345026/383591149622788097/a9c5b55a-1e19-4bc4-a2a3-9a07f339369d.png)
+![afbeelding van GME](https://github.com/Cyllos42/GME/raw/master/sources/afbeelding.png)  
+![afbeelding van GME](https://cdn.discordapp.com/attachments/357957331113345026/383591149622788097/a9c5b55a-1e19-4bc4-a2a3-9a07f339369d.png)  
+![afbeelding van GME](https://media.discordapp.net/attachments/519888612905713664/519912415908069386/2018-12-05-172603_885x586_scrot.png)  
 
 ### Hulp
 
@@ -34,5 +35,4 @@ Kan je niet wachten op nieuwe functies? Volg dan de installatielink opnieuw.
 
 Ondervind je problemen bij het gebruik van het script? Zou je graag nieuwe functies zien?
 
-Je kan hier altijd een issue openen, of me bereiken op [contact@cyllos.me](mailto:contact@cyllos.me) en op Discord (Cyllos#6273).
-0xBA57A86D
+Je kan me bereiken op [contact@cyllos.me](mailto:contact@cyllos.me).

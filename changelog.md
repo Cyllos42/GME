@@ -1,4 +1,8 @@
 ```
+v2018.12.05
+- code herschreven en updates gedaan
+- kolokill uitgeschakeld
+
 v1.12
 - wiki toegevoegd
 
