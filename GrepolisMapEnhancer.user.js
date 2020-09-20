@@ -9,12 +9,13 @@
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
 // @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
-// @version      2018.12.05
+// @version      2020.09.20
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant unsafeWindow
-// @require http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+// @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // ==/UserScript==
+
 // zet globale variabelen
 var idleList = {};
 var koloSet = false;
@@ -27,10 +28,10 @@ unsafeWindow.UWGame = UWGame;
 
 (
     function() {															// functie die het script opstart
-        console.log("GME: Starting Grepolis Map Enhancer, thank you " + UWGame.player_name);    // toon startbevestiging van het script in console
+        console.log("GME: Starting Grepolis Map Enhancer version " + GM_info.script.version + ", thank you " + UWGame.player_name);    // toon startbevestiging van het script in console
         laadSettings();												// laad de settings van de gebruiker zijn browser
         stadsinfoStarter(); 									// start het toevoegen van tags op de kaart
-        setCSS(); 														// voeg stijl toe aan Grepolis
+        setCSS();
         checkSettings();											// voeg de instelling knop toe
         console.log("GME: Succesfully loaded Grepolis Map Enhancer!"); // toon bevestiging laden van het script in console
         observe(300);													// start observe module die kijkt voor veranderingen
@@ -232,7 +233,7 @@ function doSettings() {					// functie die het instellingenmenu maakt
     var body = document.createElement('div');
     var head = document.createElement('head');
     var element = document.createElement('img'); // maak het afbeeldingelement en zet instellingen
-    element.src = "http://oi63.tinypic.com/dq6ibk.jpg";
+    //element.src = "http://oi63.tinypic.com/dq6ibk.jpg";
     element.style.width = "60%";
     element.style.float = 'right';
     body.appendChild(element);
@@ -302,13 +303,13 @@ function doSettings() {					// functie die het instellingenmenu maakt
     // zeg wat er moet gebeuren als men op een checkbox klikt
     $(".gmesettings").click(function(){toggleSetting(this);});
     // zeg wat er moet gebeuren als er op herladen gedrukt wordt. Dit slaat de inputvelden op en herlaadt de pagina
-    $("#settings_reload").click(function(){GM_setValue('setting_inactiveMin', $('#setting_inactiveMin').val()); GM_setValue('setting_inactiveMax', $('#setting_inactiveMax').val());GM_setValue('setting_discordhook' + UWGame.world_id, $('#setting_discordhook').val());window.location.reload(true); });
+    $("#settings_reload").click(function(){GM_setValue('setting_inactiveMin', $('#setting_inactiveMin').val()); GM_setValue('setting_inactiveMax', $('#setting_inactiveMax').val());GM_setValue('setting_discordhook' + UWGame.world_id, $('#setting_discordhook').val()); window.location.reload(); });
 }
 function toggleSetting(element) { // functie voor het aan en uit zetten van een module
     $('#' + element.id).toggleClass("checked");
     settings[element.id] = $(element).hasClass("checked");
     GM_setValue(element.id, $(element).hasClass("checked"));
-    console.log('Setting ' + element.id + ' changed to ' + $(element).hasClass("checked") + ' (GM_getvalue = ' + GM_getValue(element.id) + ')');
+    console.log('Setting ' + element.id + ' changed to ' + $(element).hasClass("checked") + ' (GM_getValue = ' + GM_getValue(element.id) + ')');
 }
 function checkSettings() {			// module die het instellingenknopje rechtsboven maakt
     if(document.getElementById('GMESetupLink') == null){ // indien er nog geen knopje is, doe het volgende
@@ -640,7 +641,8 @@ function stadsinfoStarter() { // deze module start het laden van tags
 }
 
 function exec(fn) {				// deze module zorgt voor her starten van het script
-    var script = document.createElement('script'); 					// maak scriptelement
+    var script = document.createElement('script'); 	// maak scriptelement
+    script.setAttribute("GME", "element");
     script.setAttribute("type", "application/javascript");	// zet het type
     script.textContent = '(' + fn + ')();';									// voeg het script toe
     document.body.appendChild(script); 											// het the script
