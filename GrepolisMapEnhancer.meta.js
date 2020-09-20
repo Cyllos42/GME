@@ -8,10 +8,10 @@
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://github.com/Cyllos42/GME/raw/master/GrepolisMapEnhancer.user.js
-// @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo.png
-// @version      2018.12.05
+// @icon         https://github.com/Cyllos42/GME/raw/master/sources/logo_geenkader.png
+// @version      2020.09.20
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant unsafeWindow
-// @require http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+// @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // ==/UserScript==
