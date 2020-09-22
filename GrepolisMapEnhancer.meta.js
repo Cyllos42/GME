@@ -8,7 +8,7 @@
 // @exclude      https://classic.grepolis.com/game/*
 // @updateURL    https://gme.cyllos.dev/GrepolisMapEnhancer.meta.js
 // @downloadURL  https://gme.cyllos.dev/GrepolisMapEnhancer.user.js
-// @version      2020.09.21
+// @version      2020.09.21.1
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant unsafeWindow
